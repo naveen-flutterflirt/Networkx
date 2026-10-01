@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 120" fill="none">
+
+  <path d="M0 60 C120 10, 250 15, 380 55 S620 90, 800 30" stroke="#FF5A0A" stroke-width="1.2" opacity=".5"/>
+  <path d="M0 72 C160 30, 300 35, 470 70 S680 95, 800 45" stroke="#FF5A0A" stroke-width="1" opacity=".3"/>
+  <path d="M0 84 C180 50, 340 55, 520 82 S690 100, 800 62" stroke="#FF5A0A" stroke-width=".9" opacity=".2"/>
+
+</svg>

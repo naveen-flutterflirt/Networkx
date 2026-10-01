@@ -1,0 +1,75 @@
+.intelligent-section.section-shell {
+  width: 100%;
+  min-height: 620px;
+  padding: 54px max(54px, calc((100vw - 1510px) / 2)) 48px;
+  display: grid;
+  grid-template-columns: minmax(540px, .84fr) minmax(700px, 1.16fr);
+  gap: clamp(48px, 4.5vw, 82px);
+  align-items: center;
+  border-radius: 28px 28px 0 0;
+  background: radial-gradient(circle at 83% 45%, rgba(60, 136, 225, .1), transparent 34%), linear-gradient(112deg, #fff 0%, #fbfdff 52%, #edf5ff 100%);
+  color: #071f47;
+  overflow: hidden;
+}
+
+.intelligent-intro { min-width: 0; align-self: center; }
+.intelligent-kicker { position: relative; padding-bottom: 20px; color: #1268ce; font-size: 13px; line-height: 1.2; font-weight: 800; letter-spacing: .105em; text-transform: uppercase; }
+.intelligent-kicker::after { content: ""; position: absolute; left: 0; bottom: 5px; width: 60px; height: 3px; border-radius: 99px; background: linear-gradient(90deg, #ff5b13 0 48%, #1678e9 48% 100%); }
+.intelligent-intro h2 { max-width: 590px; margin: 15px 0 0; color: #071f47; font-size: clamp(42px, 2.8vw, 50px); line-height: 1.13; font-weight: 800; letter-spacing: -.043em; }
+.intelligent-intro h2 span { display: block; white-space: nowrap; }
+.intelligent-intro p { max-width: 575px; margin: 24px 0 0; color: #31557f; font-size: 16px; line-height: 1.72; font-weight: 500; }
+.intelligent-cta { width: 270px; min-height: 61px; margin-top: 24px; justify-content: space-between; border: 1px solid #ff5a16; border-radius: 10px; background: linear-gradient(135deg, #061a3c, #09295a); color: #fff; font-size: 16px; font-weight: 700; box-shadow: 0 7px 0 #0d66df, 0 14px 28px rgba(18, 91, 180, .21), inset 0 1px rgba(255, 255, 255, .12); }
+.intelligent-cta:hover { background: linear-gradient(135deg, #08234c, #0c3470); }
+.intelligent-cta span { color: #ff681f; font-size: 29px; line-height: .65; }
+
+.intelligent-grid { min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 24px; }
+.intelligent-card { position: relative; min-width: 0; min-height: 218px; padding: 24px 25px 25px; display: grid; grid-template-columns: 68px minmax(0, 1fr); gap: 17px; align-items: start; overflow: hidden; border: 1px solid rgba(42, 82, 132, .15); border-radius: 16px; background: rgba(255, 255, 255, .94); text-align: left; box-shadow: 0 11px 25px rgba(28, 66, 114, .11), inset 0 1px #fff; transition: transform .2s ease, box-shadow .2s ease; }
+.intelligent-card:hover { transform: translateY(-3px); box-shadow: 0 17px 34px rgba(28, 66, 114, .16), inset 0 1px #fff; }
+.intelligent-card.blue { color: #1676ec; }
+.intelligent-card.orange { color: #ff5a19; }
+.intelligent-icon { width: 64px; height: 64px; display: grid; place-items: center; border: 7px solid color-mix(in srgb, currentColor 15%, #fff); border-radius: 50%; background: linear-gradient(145deg, color-mix(in srgb, currentColor 92%, #fff), color-mix(in srgb, currentColor 70%, #08275c)); box-shadow: inset 0 1px rgba(255, 255, 255, .62), 0 7px 15px color-mix(in srgb, currentColor 22%, transparent); }
+.intelligent-icon svg { width: 29px; height: 29px; color: #fff; filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .22)); }
+.intelligent-card-copy { min-width: 0; padding-top: 5px; }
+.intelligent-card h3 { margin: 0; color: #081d43; font-size: 17px; line-height: 1.28; font-weight: 700; letter-spacing: -.02em; }
+.intelligent-card-copy > i { display: block; width: 34px; height: 2px; margin: 11px 0 18px; border-radius: 99px; background: currentColor; }
+.intelligent-card p { max-width: 310px; margin: 0; color: #31557e; font-size: 14px; line-height: 1.62; font-weight: 500; }
+.intelligent-node-mark { position: absolute; right: 17px; bottom: 14px; width: 64px; height: 43px; opacity: .72; }
+.intelligent-node-mark::before, .intelligent-node-mark::after, .intelligent-node-mark i::before, .intelligent-node-mark i::after { content: ""; position: absolute; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.intelligent-node-mark::before { left: 3px; bottom: 2px; }
+.intelligent-node-mark::after { left: 39px; bottom: 16px; }
+.intelligent-node-mark i::before { right: 2px; top: 2px; }
+.intelligent-node-mark i::after { right: 0; bottom: 0; opacity: .35; }
+.intelligent-node-mark b, .intelligent-node-mark i { position: absolute; inset: 0; }
+.intelligent-node-mark b::before, .intelligent-node-mark b::after { content: ""; position: absolute; height: 1px; transform-origin: left center; background: color-mix(in srgb, currentColor 42%, transparent); }
+.intelligent-node-mark b::before { left: 8px; bottom: 5px; width: 34px; transform: rotate(-23deg); }
+.intelligent-node-mark b::after { left: 43px; bottom: 20px; width: 24px; transform: rotate(-49deg); }
+
+@media (max-width: 1320px) {
+  .intelligent-section.section-shell { grid-template-columns: minmax(455px, .82fr) minmax(610px, 1.18fr); gap: 38px; padding-inline: 38px; }
+  .intelligent-intro h2 { font-size: 42px; }
+  .intelligent-card { min-height: 210px; padding: 21px; grid-template-columns: 60px minmax(0, 1fr); gap: 14px; }
+  .intelligent-icon { width: 57px; height: 57px; border-width: 6px; }
+  .intelligent-icon svg { width: 26px; height: 26px; }
+  .intelligent-card h3 { font-size: 15px; }
+  .intelligent-card p { font-size: 13px; }
+}
+
+@media (max-width: 1050px) {
+  .intelligent-section.section-shell { padding: 58px max(24px, calc((100% - 820px) / 2)) 64px; grid-template-columns: 1fr; gap: 42px; }
+  .intelligent-intro h2 { max-width: 650px; font-size: clamp(40px, 6.3vw, 50px); }
+  .intelligent-intro p { max-width: 670px; }
+  .intelligent-grid { width: 100%; }
+  .intelligent-card { min-height: 200px; }
+}
+
+@media (max-width: 620px) {
+  .intelligent-section.section-shell { padding: 48px 18px 54px; border-radius: 22px 22px 0 0; }
+  .intelligent-kicker { font-size: 11px; }
+  .intelligent-intro h2 { font-size: 34px; line-height: 1.1; }
+  .intelligent-intro h2 span { white-space: normal; }
+  .intelligent-intro p { font-size: 14px; }
+  .intelligent-cta { width: 100%; min-height: 57px; }
+  .intelligent-grid { grid-template-columns: 1fr; gap: 14px; }
+  .intelligent-card { min-height: 185px; padding: 20px 18px; grid-template-columns: 58px minmax(0, 1fr); }
+  .intelligent-icon { width: 54px; height: 54px; }
+}

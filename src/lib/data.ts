@@ -1,0 +1,197 @@
+// ─── TYPES ───────────────────────────────────────────────────────────────────
+export type Role = 'member'|'franchise'|'hq_admin'|'super_admin'
+
+export interface User {
+  id:string; name:string; email:string; role:Role; avatar:string
+  city:string; company:string; profession:string; plan:string
+  reputation:number; group:string; connections:number
+  pending:number; given:number; received:number; revenue:string
+  ranking:number; renewal:string; visitors:number
+}
+
+// ─── AUTH ─────────────────────────────────────────────────────────────────────
+export const USERS: User[] = [
+  {id:'u1',name:'Arjun Mehta',email:'member@nia.com',role:'member',avatar:'AM',city:'Mumbai',company:'Mehta Exports Pvt Ltd',profession:'Manufacturer & Exporter',plan:'Pro',reputation:780,group:'Mumbai South',connections:24,pending:3,given:12,received:8,revenue:'₹4.2L',ranking:14,renewal:'Apr 1, 2027',visitors:3},
+  {id:'u4',name:'Rajesh Gupta',email:'franchise@nia.com',role:'franchise',avatar:'RG',city:'Delhi',company:'Gupta Holdings',profession:'Franchise Owner',plan:'Teams',reputation:2240,group:'Delhi NCR',connections:142,pending:11,given:89,received:72,revenue:'₹38.4L',ranking:2,renewal:'Jan 1, 2027',visitors:34},
+  {id:'u5',name:'Kavita Patel',email:'hq@nia.com',role:'hq_admin',avatar:'KP',city:'Ahmedabad',company:'NIA One HQ',profession:'HQ Administrator',plan:'Teams',reputation:9800,group:'HQ',connections:512,pending:0,given:0,received:0,revenue:'₹2.2Cr',ranking:0,renewal:'',visitors:0},
+  {id:'u6',name:'Super Admin',email:'super@nia.com',role:'super_admin',avatar:'SA',city:'Pan India',company:'NIA One',profession:'Super Admin',plan:'Teams',reputation:9999,group:'HQ',connections:999,pending:0,given:0,received:0,revenue:'₹2.2Cr',ranking:0,renewal:'',visitors:0},
+]
+
+// ─── MEMBERS ──────────────────────────────────────────────────────────────────
+export const MEMBERS = [
+  {id:'m1',name:'Ravi Kumar',company:'TechSoft India',profession:'IT Services',city:'Pune',state:'Maharashtra',industry:'Technology',avatar:'RK',color:'#6366f1',tags:['Tech','B2B','SaaS'],connections:45,mutual:3,verified:true,reputation:620,bio:'15 years in enterprise IT. Cloud migrations and ERP implementations for 50+ companies.',services:['Cloud Migration','ERP','Custom Software'],clients:['Tata Motors','L&T','HDFC'],testimonials:[{name:'Amit Shah',text:'Ravi delivered our ERP on time and budget. Highly recommended!'}],openToReferrals:true,recentlyActive:true},
+  {id:'m2',name:'Sneha Joshi',company:'Joshi Textiles',profession:'Textile Manufacturer',city:'Surat',state:'Gujarat',industry:'Manufacturing',avatar:'SJ',color:'#ec4899',tags:['Manufacturing','Export'],connections:28,mutual:1,verified:true,reputation:480,bio:'3rd gen textile manufacturer. Export to 12 countries. 500+ product range.',services:['Textile Manufacturing','Export','Wholesale'],clients:['Zara India','FabIndia'],testimonials:[{name:'Rohit Verma',text:'Quality products, timely delivery. Great partner!'}],openToReferrals:true,recentlyActive:true},
+  {id:'m3',name:'Vikram Singh',company:'Singh Builders',profession:'Real Estate Developer',city:'Delhi',state:'Delhi',industry:'Real Estate',avatar:'VS',color:'#f59e0b',tags:['Real Estate','Construction'],connections:67,mutual:5,verified:false,reputation:710,bio:'Commercial & residential projects across NCR. 200+ units delivered.',services:['Commercial Projects','Residential','Property Advisory'],clients:['DLF','Godrej Properties'],testimonials:[],openToReferrals:false,recentlyActive:true},
+  {id:'m4',name:'Anita Rao',company:'Rao & Associates',profession:'CA & Financial Advisor',city:'Hyderabad',state:'Telangana',industry:'Finance',avatar:'AR',color:'#10b981',tags:['Finance','CA','Tax'],connections:89,mutual:7,verified:true,reputation:840,bio:'Chartered Accountant 18 years. GST, tax planning, audit, and business advisory.',services:['GST Filing','Tax Planning','Audit','Business Advisory'],clients:['Various SMEs'],testimonials:[{name:'Suresh Iyer',text:'Anita saved us 30% in taxes through smart planning!'}],openToReferrals:true,recentlyActive:true},
+  {id:'m5',name:'Mohit Agarwal',company:'Agarwal Foods',profession:'FMCG Distributor',city:'Jaipur',state:'Rajasthan',industry:'FMCG',avatar:'MA',color:'#8b5cf6',tags:['FMCG','Retail','Distribution'],connections:34,mutual:2,verified:true,reputation:560,bio:'Pan-Rajasthan FMCG network. 500+ retail touchpoints. 8 years experience.',services:['FMCG Distribution','Retail Network','Logistics'],clients:['HUL','ITC','Nestle'],testimonials:[],openToReferrals:true,recentlyActive:false},
+  {id:'m6',name:'Neha Tiwari',company:'DigitalEdge Agency',profession:'Digital Marketing',city:'Mumbai',state:'Maharashtra',industry:'Marketing',avatar:'NT',color:'#ef4444',tags:['Marketing','Digital','SEO'],connections:52,mutual:4,verified:true,reputation:690,bio:'Full-service digital agency. Google Partner. Helped 80+ brands scale online.',services:['SEO','Performance Marketing','Social Media','Content'],clients:['Boat','Mamaearth','Sugar Cosmetics'],testimonials:[{name:'Pooja Malhotra',text:'Neha doubled our online sales in 3 months!'}],openToReferrals:true,recentlyActive:true},
+  {id:'m7',name:'Rohit Verma',company:'Verma Logistics',profession:'Logistics & Supply Chain',city:'Chennai',state:'Tamil Nadu',industry:'Logistics',avatar:'RV',color:'#14b8a6',tags:['Logistics','Supply Chain'],connections:41,mutual:0,verified:false,reputation:430,bio:'Pan-India logistics. Cold chain specialists. Fleet of 200+ vehicles.',services:['Freight','Cold Chain','Last Mile'],clients:['BigBasket','Swiggy Instamart'],testimonials:[],openToReferrals:false,recentlyActive:true},
+  {id:'m8',name:'Deepa Nair',company:'Nair Legal LLP',profession:'Corporate Lawyer',city:'Kochi',state:'Kerala',industry:'Legal',avatar:'DN',color:'#f97316',tags:['Legal','Corporate','IP'],connections:38,mutual:2,verified:true,reputation:590,bio:'Specialise in corporate law, M&A, IP protection, and startup advisory.',services:['Corporate Law','M&A','IP Protection','Startup Legal'],clients:['Various Startups'],testimonials:[],openToReferrals:true,recentlyActive:true},
+  {id:'m9',name:'Suresh Iyer',company:'Iyer Pharma',profession:'Pharma Distributor',city:'Chennai',state:'Tamil Nadu',industry:'Healthcare',avatar:'SI',color:'#0ea5e9',tags:['Pharma','Healthcare'],connections:61,mutual:3,verified:true,reputation:730,bio:'South India pharma distribution. 22 years. 800+ pharmacy network.',services:['Pharma Distribution','Healthcare Logistics'],clients:['Sun Pharma','Cipla','Dr. Reddys'],testimonials:[],openToReferrals:true,recentlyActive:true},
+  {id:'m10',name:'Pooja Malhotra',company:'Malhotra Events',profession:'Event Management',city:'Mumbai',state:'Maharashtra',industry:'Events',avatar:'PM',color:'#a855f7',tags:['Events','Hospitality'],connections:77,mutual:6,verified:true,reputation:810,bio:'Premium corporate events, product launches, and destination weddings. 500+ events.',services:['Corporate Events','Weddings','Conferences','Product Launches'],clients:['Reliance','HDFC','Tata'],testimonials:[],openToReferrals:true,recentlyActive:true},
+  {id:'m11',name:'Amit Shah',company:'Shah Solar',profession:'Solar Energy',city:'Ahmedabad',state:'Gujarat',industry:'Energy',avatar:'AS',color:'#22c55e',tags:['Solar','Energy','Green'],connections:29,mutual:1,verified:true,reputation:510,bio:'Rooftop solar EPC contractor. 10MW+ installed capacity across Gujarat.',services:['Solar Installation','EPC','AMC'],clients:['Gujarat Industries'],testimonials:[],openToReferrals:true,recentlyActive:false},
+  {id:'m12',name:'Rekha Menon',company:'Menon Exports',profession:'Spice Exporter',city:'Kochi',state:'Kerala',industry:'Agriculture',avatar:'RM',color:'#f43f5e',tags:['Export','Spices'],connections:44,mutual:2,verified:true,reputation:640,bio:'Kerala spice exporter. 25+ years. Organic certified. Export to EU, USA, Japan.',services:['Spice Export','Organic Products','B2B Supply'],clients:['International Buyers'],testimonials:[],openToReferrals:true,recentlyActive:true},
+]
+
+// ─── GROUPS ───────────────────────────────────────────────────────────────────
+export const GROUPS = [
+  {id:'g1',name:'Mumbai South',city:'Mumbai',state:'Maharashtra',members:42,capacity:50,director:'Vikram Nair',meetings:52,attendance:87,openSeats:5,status:'active',category:'Metro',revenue:'₹18.5L',established:'Jan 2020',categories:['IT','Finance','Real Estate','Manufacturing','Marketing','Legal','Logistics','Pharma','Events','Education','Retail','Construction'],topMembers:['Arjun Mehta','Neha Tiwari','Anita Rao']},
+  {id:'g2',name:'Bangalore Central',city:'Bangalore',state:'Karnataka',members:38,capacity:50,director:'Meena Rao',meetings:48,attendance:82,openSeats:8,status:'active',category:'Metro',revenue:'₹15.2L',established:'Jun 2020',categories:['IT','Startup','Finance','Marketing','Legal'],topMembers:['Ravi Kumar','Deepa Nair']},
+  {id:'g3',name:'Delhi NCR',city:'Delhi',state:'Delhi',members:55,capacity:60,director:'Rohit Arora',meetings:60,attendance:79,openSeats:2,status:'active',category:'Metro',revenue:'₹24.8L',established:'Sep 2019',categories:['Real Estate','Construction','Finance','Manufacturing','Retail'],topMembers:['Vikram Singh','Mohit Agarwal']},
+  {id:'g4',name:'Pune West',city:'Pune',state:'Maharashtra',members:29,capacity:45,director:'Sunita Kulkarni',meetings:40,attendance:75,openSeats:12,status:'active',category:'Tier-1',revenue:'₹10.4L',established:'Mar 2021',categories:['IT','Manufacturing','Education'],topMembers:['Suresh Iyer']},
+  {id:'g5',name:'Jaipur Pink City',city:'Jaipur',state:'Rajasthan',members:22,capacity:40,director:'Amit Jain',meetings:32,attendance:70,openSeats:18,status:'new',category:'Tier-2',revenue:'₹6.1L',established:'Jan 2026',categories:['FMCG','Retail','Jewellery'],topMembers:['Mohit Agarwal']},
+  {id:'g6',name:'Hyderabad Tech',city:'Hyderabad',state:'Telangana',members:47,capacity:50,director:'Kavitha Reddy',meetings:56,attendance:91,openSeats:3,status:'active',category:'Metro',revenue:'₹21.3L',established:'Apr 2020',categories:['IT','Pharma','Finance','Manufacturing'],topMembers:['Anita Rao','Suresh Iyer']},
+  {id:'g7',name:'Ahmedabad Business',city:'Ahmedabad',state:'Gujarat',members:33,capacity:45,director:'Kalpesh Mehta',meetings:44,attendance:83,openSeats:9,status:'active',category:'Tier-1',revenue:'₹12.7L',established:'Nov 2020',categories:['Manufacturing','Textile','Diamond','Solar'],topMembers:['Amit Shah']},
+  {id:'g8',name:'Kochi Seaport',city:'Kochi',state:'Kerala',members:18,capacity:35,director:'Lina Joseph',meetings:24,attendance:68,openSeats:17,status:'new',category:'Tier-2',revenue:'₹4.3L',established:'Mar 2026',categories:['Export','Spices','Shipping','Tourism'],topMembers:['Rekha Menon','Deepa Nair']},
+]
+
+// ─── REFERRALS ────────────────────────────────────────────────────────────────
+export const REFERRALS = [
+  {id:'r1',title:'Website Development for Retail Brand',client:'StyleCo Pvt Ltd',clientEmail:'ceo@styleco.in',clientMobile:'+91 98765 43210',requirement:'Full e-commerce website with mobile app',category:'IT Services',budget:'₹2,50,000',urgency:'High',status:'Won',referredTo:'Ravi Kumar',referredBy:'Arjun Mehta',date:'Mar 15, 2026',value:250000,notes:'D2C fashion brand. Need iOS+Android app too.',internalNotes:'Client is ready to sign. Push for Q2 delivery.',commission:'₹12,500',timeline:[{date:'Mar 15',event:'Referral Created'},{date:'Mar 16',event:'Accepted by Ravi'},{date:'Mar 18',event:'Initial Call Done'},{date:'Mar 22',event:'Proposal Sent – ₹2.5L'},{date:'Apr 2',event:'Deal Won! 🎉'}]},
+  {id:'r2',title:'Export Insurance for Textile Shipment',client:'XYZ Textiles',clientEmail:'cfo@xyztextiles.com',clientMobile:'+91 99001 12345',requirement:'Annual marine cargo insurance',category:'Finance',budget:'₹50,000',urgency:'Medium',status:'Contacted',referredTo:'Anita Rao',referredBy:'Sneha Joshi',date:'Apr 1, 2026',value:50000,notes:'Annual marine cargo insurance for 12-country export.',internalNotes:'Follow up after Apr 10.',commission:'₹2,500',timeline:[{date:'Apr 1',event:'Referral Created'},{date:'Apr 2',event:'Accepted by Anita'},{date:'Apr 5',event:'Client Contacted'}]},
+  {id:'r3',title:'Commercial Office Space – 5000 sqft',client:'StartupHub India',clientEmail:'ops@startuphub.in',clientMobile:'+91 98100 55432',requirement:'Plug and play office in south Delhi',category:'Real Estate',budget:'₹80,000/mo',urgency:'Low',status:'Proposal Sent',referredTo:'Vikram Singh',referredBy:'Arjun Mehta',date:'Apr 10, 2026',value:80000,notes:'Startup wants Grade A space.',internalNotes:'Showing 3 properties this week.',commission:'₹8,000',timeline:[{date:'Apr 10',event:'Referral Created'},{date:'Apr 11',event:'Accepted'},{date:'Apr 14',event:'Site Visit Arranged'},{date:'Apr 17',event:'Proposal Sent'}]},
+  {id:'r4',title:'GST Audit & Annual Filing',client:'Patel Traders',clientEmail:'accounts@pateltrade.com',clientMobile:'+91 97654 32100',requirement:'FY2025-26 GST audit + ITR filing',category:'CA / Finance',budget:'₹25,000',urgency:'High',status:'New',referredTo:'Anita Rao',referredBy:'Mohit Agarwal',date:'Apr 19, 2026',value:25000,notes:'Turnover ~₹8Cr. Deadline May 31.',internalNotes:'',commission:'₹1,250',timeline:[{date:'Apr 19',event:'Referral Created'}]},
+  {id:'r5',title:'Digital Marketing – 6 Month Retainer',client:'NewBrand Fashion',clientEmail:'marketing@newbrand.in',clientMobile:'+91 98200 66781',requirement:'Full digital marketing management',category:'Marketing',budget:'₹40,000/mo',urgency:'Medium',status:'Lost',referredTo:'Neha Tiwari',referredBy:'Arjun Mehta',date:'Feb 20, 2026',value:40000,notes:'Client chose cheaper agency.',internalNotes:'Follow up in Q3 2026.',commission:'₹0',timeline:[{date:'Feb 20',event:'Referral Created'},{date:'Feb 21',event:'Accepted'},{date:'Feb 25',event:'Proposal Sent'},{date:'Mar 10',event:'Lost – Budget'}]},
+  {id:'r6',title:'ERP Software Implementation',client:'MegaCorp Industries',clientEmail:'cio@megacorp.in',clientMobile:'+91 99100 77890',requirement:'SAP B1 for 200 users',category:'IT Services',budget:'₹1,20,000',urgency:'High',status:'Completed',referredTo:'Ravi Kumar',referredBy:'Rajesh Gupta',date:'Jan 5, 2026',value:120000,notes:'Manufacturing firm. Full implementation.',internalNotes:'Project complete. Invoice raised.',commission:'₹6,000',timeline:[{date:'Jan 5',event:'Referral Created'},{date:'Jan 6',event:'Accepted'},{date:'Jan 20',event:'Proposal Sent'},{date:'Feb 1',event:'Won'},{date:'Mar 30',event:'Completed ✅'}]},
+  {id:'r7',title:'Solar Rooftop – Factory 500kW',client:'Gujarat Ceramics Ltd',clientEmail:'plant@gjceram.in',clientMobile:'+91 98765 00123',requirement:'Industrial solar EPC project',category:'Solar Energy',budget:'₹1,80,00,000',urgency:'Medium',status:'Accepted',referredTo:'Amit Shah',referredBy:'Rajesh Gupta',date:'Apr 12, 2026',value:18000000,notes:'2-acre flat factory roof.',internalNotes:'Site survey scheduled Apr 24.',commission:'₹90,000',timeline:[{date:'Apr 12',event:'Referral Created'},{date:'Apr 13',event:'Accepted by Amit'}]},
+]
+
+// ─── EVENTS ───────────────────────────────────────────────────────────────────
+export const EVENTS = [
+  {id:'e1',title:'Business Mixer – Mumbai Spring Edition',date:'Apr 28, 2026',time:'6:00 PM',venue:'The Grand Hyatt, Mumbai',host:'Mumbai South Group',type:'Mixer',seats:120,booked:108,waitlist:14,status:'upcoming',city:'Mumbai',price:500,paid:true,banner:'🎭',description:'Premium networking mixer with 100+ business leaders. Cocktails, canapes & connections.',speakers:['Rajesh Sharma – TiE Mumbai','Priya Mehta – FICCI Women'],tags:['Networking','Social'],agenda:['6:00 PM – Welcome Drinks','6:30 PM – Keynote','7:00 PM – Open Networking','8:30 PM – Dinner','9:30 PM – Close']},
+  {id:'e2',title:'NIA Leadership Summit 2026',date:'May 15, 2026',time:'9:00 AM',venue:'Leela Palace, Bangalore',host:'NIA HQ',type:'Summit',seats:300,booked:245,waitlist:28,status:'upcoming',city:'Bangalore',price:2500,paid:true,banner:'🏆',description:'Annual summit for group leaders, franchise owners, and top performers.',speakers:['Nandan Nilekani – Keynote','Kiran Mazumdar Shaw – Special Address'],tags:['Leadership','Strategy'],agenda:['9:00 AM – Registration','10:00 AM – Keynote','12:00 PM – Panel Discussions','1:00 PM – Lunch','2:00 PM – Workshops','5:00 PM – Awards Night']},
+  {id:'e3',title:'NIA Annual Convention 2026',date:'Jun 1, 2026',time:'10:00 AM',venue:'India Expo Centre, Greater Noida',host:'NIA HQ',type:'Convention',seats:1000,booked:672,waitlist:0,status:'upcoming',city:'Delhi',price:1500,paid:true,banner:'🌟',description:"India's largest business networking convention. 1000+ members, 50+ speakers, awards night.",speakers:['Multiple Keynotes','Panel Discussions','Awards Ceremony'],tags:['Convention','Awards'],agenda:['10:00 AM – Inauguration','11:00 AM – Keynotes','1:00 PM – Lunch','2:00 PM – Breakout Sessions','6:00 PM – Awards Night']},
+  {id:'e4',title:'Chapter Directors Meet Q1',date:'Mar 10, 2026',time:'2:00 PM',venue:'Pune Club, Pune',host:'NIA HQ',type:'Meeting',seats:40,booked:38,waitlist:0,status:'completed',city:'Pune',price:0,paid:false,banner:'📋',description:'Quarterly strategic review for all group directors.',speakers:[],tags:['Internal','Strategy'],agenda:[]},
+  {id:'e5',title:'Digital Marketing Workshop',date:'May 5, 2026',time:'10:00 AM',venue:'ITC Grand, Chennai',host:'Chennai Group',type:'Workshop',seats:80,booked:61,waitlist:5,status:'upcoming',city:'Chennai',price:799,paid:true,banner:'📱',description:'Half-day workshop on D2C growth, performance marketing, and AI tools.',speakers:['Neha Tiwari – DigitalEdge'],tags:['Workshop','Marketing'],agenda:['10:00 AM – D2C Growth Strategies','11:30 AM – Performance Marketing','1:00 PM – Lunch','2:00 PM – AI Tools for Marketing','4:00 PM – Q&A']},
+]
+
+// ─── MEETINGS ─────────────────────────────────────────────────────────────────
+export const MEETINGS = [
+  {id:'mt1',group:'Mumbai South',date:'Apr 22, 2026',time:'7:30 PM',venue:'Hotel Trident, Nariman Point',attendees:38,max:42,type:'Monthly NLN',platform:'Google Meet',link:'https://meet.google.com/abc-defg-hij',agenda:['Roll Call & Attendance','Member Spotlight – Arjun Mehta','Referral Round (20 min)','Visitor Introductions – 3 visitors','Education Slot – 10 min','Announcements'],speakers:['Arjun Mehta – Member Spotlight'],visitors:3,status:'upcoming',feedback:[]},
+  {id:'mt2',group:'Bangalore Central',date:'Apr 23, 2026',time:'8:00 PM',venue:'ITC Gardenia, Residency Road',attendees:31,max:38,type:'Monthly NLN',platform:'Zoom',link:'https://zoom.us/j/123456789',agenda:['New Member Welcome','Education Slot – Digital Marketing','Referral Round','Business Card Exchange'],speakers:['Priya Sharma – Education Slot'],visitors:2,status:'upcoming',feedback:[]},
+  {id:'mt3',group:'Delhi NCR',date:'Apr 25, 2026',time:'7:00 PM',venue:'The Taj Mahal Hotel, New Delhi',attendees:48,max:55,type:'Monthly NLN',platform:'Google Meet',link:'https://meet.google.com/xyz-abcd-efg',agenda:['Annual Role Elections','Performance Review Q1','Top Referrer Awards','Strategic Planning 2026-27'],speakers:['Rohit Arora – Annual Review'],visitors:5,status:'upcoming',feedback:[]},
+  {id:'mt4',group:'Mumbai South',date:'Apr 15, 2026',time:'7:30 PM',venue:'Hotel Trident, Nariman Point',attendees:40,max:42,type:'Monthly NLN',platform:'Google Meet',link:'',agenda:['Regular monthly meeting'],speakers:[],visitors:3,status:'completed',feedback:[{member:'Arjun Mehta',rating:5,comment:'Great energy this week!'},{member:'Neha Tiwari',rating:4,comment:'Good referral round.'}],referrals:14},
+]
+
+// ─── ATTENDANCE ───────────────────────────────────────────────────────────────
+export const ATTENDANCE = [
+  {id:'a1',member:'Arjun Mehta',avatar:'AM',color:'#6366f1',present:48,total:52,pct:92,streak:8,status:'active',lastAbsent:'Mar 8, 2026'},
+  {id:'a2',member:'Neha Tiwari',avatar:'NT',color:'#ef4444',present:46,total:52,pct:88,streak:5,status:'active',lastAbsent:'Mar 22, 2026'},
+  {id:'a3',member:'Ravi Kumar',avatar:'RK',color:'#6366f1',present:50,total:52,pct:96,streak:12,status:'active',lastAbsent:'Feb 14, 2026'},
+  {id:'a4',member:'Anita Rao',avatar:'AR',color:'#10b981',present:52,total:52,pct:100,streak:52,status:'active',lastAbsent:'Never'},
+  {id:'a5',member:'Mohit Agarwal',avatar:'MA',color:'#8b5cf6',present:32,total:52,pct:62,streak:0,status:'warning',lastAbsent:'Apr 15, 2026'},
+  {id:'a6',member:'Rohit Verma',avatar:'RV',color:'#14b8a6',present:28,total:52,pct:54,streak:0,status:'danger',lastAbsent:'Apr 22, 2026'},
+  {id:'a7',member:'Deepa Nair',avatar:'DN',color:'#f97316',present:44,total:52,pct:85,streak:4,status:'active',lastAbsent:'Apr 1, 2026'},
+  {id:'a8',member:'Suresh Iyer',avatar:'SI',color:'#0ea5e9',present:30,total:52,pct:58,streak:0,status:'warning',lastAbsent:'Apr 19, 2026'},
+]
+
+// ─── LEARNING ─────────────────────────────────────────────────────────────────
+export const COURSES = [
+  {id:'c1',title:'BOND Training — Building Deep Business Relationships',cat:'Networking',instructor:'Dr. Rajesh Nair',duration:'4h 30m',lessons:18,enrolled:1240,rating:4.8,price:0,emoji:'📡',progress:65,type:'video',hasPDF:true,hasQuiz:true,hasCert:false},
+  {id:'c2',title:'Public Speaking for Business Leaders',cat:'Leadership',instructor:'Preethi Menon',duration:'6h 15m',lessons:24,enrolled:890,rating:4.9,price:1999,emoji:'🎤',progress:0,type:'video',hasPDF:true,hasQuiz:true,hasCert:true},
+  {id:'c3',title:'Digital Marketing Masterclass 2026',cat:'Marketing',instructor:'Alok Mathur',duration:'8h 00m',lessons:32,enrolled:2100,rating:4.7,price:2999,emoji:'📱',progress:20,type:'video',hasPDF:true,hasQuiz:true,hasCert:true},
+  {id:'c4',title:'GST & Tax Planning – FY 2026-27',cat:'Finance',instructor:'CA Sunita Krishnan',duration:'5h 00m',lessons:20,enrolled:760,rating:4.6,price:1499,emoji:'💼',progress:100,type:'video',hasPDF:true,hasQuiz:true,hasCert:true},
+  {id:'c5',title:'AI Tools for Business Productivity',cat:'AI for Business',instructor:'Vikram Anand',duration:'3h 45m',lessons:15,enrolled:3400,rating:4.9,price:0,emoji:'🤖',progress:30,type:'video',hasPDF:false,hasQuiz:true,hasCert:false},
+  {id:'c6',title:'Sales Mastery – B2B Edition',cat:'Sales',instructor:'Rahul Mehta',duration:'5h 30m',lessons:22,enrolled:1100,rating:4.7,price:2499,emoji:'💰',progress:0,type:'video',hasPDF:true,hasQuiz:true,hasCert:true},
+  {id:'c7',title:'Personal Branding for Professionals',cat:'Branding',instructor:'Priya Kapoor',duration:'3h 00m',lessons:12,enrolled:880,rating:4.5,price:999,emoji:'✨',progress:0,type:'video',hasPDF:true,hasQuiz:false,hasCert:false},
+  {id:'c8',title:'Advanced Referral Mastery Program',cat:'Networking',instructor:'NIA Academy',duration:'2h 00m',lessons:8,enrolled:4200,rating:5.0,price:0,emoji:'🤝',progress:80,type:'video',hasPDF:true,hasQuiz:true,hasCert:true},
+]
+
+// ─── TRAVEL ───────────────────────────────────────────────────────────────────
+export const TRAVEL = [
+  {id:'t1',user:'Ravi Kumar',avatar:'RK',color:'#6366f1',from:'Pune',to:'Mumbai',dates:'Apr 24–26',purpose:'Client Meetings',lookingFor:'Introductions to CIOs & IT decision-makers',posted:'2 days ago',responses:3},
+  {id:'t2',user:'Anita Rao',avatar:'AR',color:'#10b981',from:'Hyderabad',to:'Bangalore',dates:'May 2–4',purpose:'FINSEC Conference',lookingFor:'Co-working space + evening networking dinners',posted:'5 days ago',responses:7},
+  {id:'t3',user:'Mohit Agarwal',avatar:'MA',color:'#8b5cf6',from:'Jaipur',to:'Delhi',dates:'Apr 28–30',purpose:'Trade Fair – India FMCG Expo',lookingFor:'Distributors and modern retail buyers',posted:'1 day ago',responses:4},
+  {id:'t4',user:'Deepa Nair',avatar:'DN',color:'#f97316',from:'Kochi',to:'Mumbai',dates:'May 10–12',purpose:'Client Acquisition',lookingFor:'Startup founders needing corporate legal advisory',posted:'3 days ago',responses:2},
+  {id:'t5',user:'Suresh Iyer',avatar:'SI',color:'#0ea5e9',from:'Chennai',to:'Hyderabad',dates:'May 5–7',purpose:'Pharma Conference',lookingFor:'Hospital admins & pharmacy chain owners',posted:'Today',responses:5},
+]
+
+// ─── BUSINESS HUB ─────────────────────────────────────────────────────────────
+export const BIZ_HUB = [
+  {id:'b1',title:'Need CA for Annual GST Audit',type:'Need CA',budget:'₹25,000',urgency:'High',city:'Mumbai',cat:'Finance',desc:'Mid-size trading company. FY26 GST audit + ITR. Turnover ~₹8Cr.',responses:4,posted:'Apr 18',quotes:[{by:'Anita Rao',amount:'₹22,000',note:'Can start May 1'}]},
+  {id:'b2',title:'Seeking Seed Investor – EdTech Startup',type:'Need Investor',budget:'₹50L – 2Cr',urgency:'Medium',city:'Bangalore',cat:'Investment',desc:'EdTech startup. 2,000 paying users. MRR ₹4.2L. Seeking angel/seed investor.',responses:11,posted:'Apr 15',quotes:[]},
+  {id:'b3',title:'Full-Stack Website + Mobile App',type:'Need Website Agency',budget:'₹1,50,000',urgency:'Low',city:'Pune',cat:'IT Services',desc:'D2C fashion brand needs e-commerce website + iOS/Android app.',responses:7,posted:'Apr 12',quotes:[{by:'Ravi Kumar',amount:'₹1,40,000',note:'6 week delivery'}]},
+  {id:'b4',title:'Hiring – North India Sales Manager',type:'Hiring',budget:'₹8–12L CTC',urgency:'High',city:'Delhi',cat:'HR',desc:'B2B SaaS company. Need Sales Manager North India. 5+ years.',responses:3,posted:'Apr 19',quotes:[]},
+  {id:'b5',title:'Pan-India FMCG Distribution Partnership',type:'Partnership',budget:'Revenue Share',urgency:'Medium',city:'Jaipur',cat:'Business Development',desc:'Rajasthan FMCG brand seeking distribution partners in MH, GJ, MP.',responses:9,posted:'Apr 10',quotes:[]},
+  {id:'b6',title:'Need Corporate Legal Advisor',type:'Need Vendor',budget:'₹15,000/mo',urgency:'Low',city:'Kochi',cat:'Legal',desc:'Fast-growing startup needs corporate lawyer for contracts, IP, compliance.',responses:2,posted:'Apr 17',quotes:[{by:'Deepa Nair',amount:'₹12,000/mo',note:'Happy to discuss scope'}]},
+]
+
+// ─── MESSAGES ─────────────────────────────────────────────────────────────────
+export const MESSAGES = [
+  {id:'msg1',from:'Ravi Kumar',avatar:'RK',color:'#6366f1',type:'private',msgs:[{from:'them',text:'Hi Arjun! Thanks for the referral. StyleCo seems like a great fit. Can we connect this week?',time:'10:42 AM',read:true},{from:'me',text:'Hey Ravi! Absolutely. How does Thursday 4pm work?',time:'10:45 AM',read:true},{from:'them',text:"Thursday 4pm works perfectly. I'll send a Google Meet link.",time:'10:47 AM',read:true}],unread:0,lastTime:'10:47 AM'},
+  {id:'msg2',from:'Anita Rao',avatar:'AR',color:'#10b981',type:'private',msgs:[{from:'them',text:'Arjun, received the referral for Patel Traders. Will reach out tomorrow. Thanks!',time:'Yesterday',read:false}],unread:1,lastTime:'Yesterday'},
+  {id:'msg3',from:'Mumbai South Group',avatar:'MS',color:'#FF5C35',type:'group',msgs:[{from:'them',text:'📅 Reminder: Monthly NLN meeting Apr 28 at 7:30 PM. Hotel Trident, Nariman Point. Visitors confirmed: 3.',time:'Apr 20',read:false},{from:'them',text:'📌 Agenda published. Member spotlight: Arjun Mehta. Please come prepared.',time:'Apr 20',read:false}],unread:2,lastTime:'Apr 20'},
+  {id:'msg4',from:'Vikram Singh',avatar:'VS',color:'#f59e0b',type:'private',msgs:[{from:'them',text:'Thanks for the referral brother. StartupHub visit went well – proposal sent.',time:'Apr 18',read:true},{from:'me',text:'Great! Keep me posted 🤞',time:'Apr 18',read:true}],unread:0,lastTime:'Apr 18'},
+  {id:'msg5',from:'NIA Broadcast',avatar:'NB',color:'#8b5cf6',type:'broadcast',msgs:[{from:'them',text:'🌟 NIA Annual Convention registrations open! Early bird ₹1,500 until May 1. Use code EARLY2026.',time:'Apr 19',read:false}],unread:1,lastTime:'Apr 19'},
+]
+
+// ─── NOTIFICATIONS ────────────────────────────────────────────────────────────
+export const NOTIFICATIONS = [
+  {id:'n1',type:'referral',title:'New Referral Assigned',desc:'Mohit Agarwal referred Patel Traders to you for GST Audit.',time:'2h ago',read:false,icon:'🔁'},
+  {id:'n2',type:'meeting',title:'Meeting Tomorrow',desc:'Mumbai South monthly meeting at 7:30 AM. Hotel Trident.',time:'5h ago',read:false,icon:'📅'},
+  {id:'n3',type:'connection',title:'Connection Request',desc:'Neha Tiwari wants to connect with you.',time:'1d ago',read:false,icon:'👥'},
+  {id:'n4',type:'renewal',title:'Renewal Reminder',desc:'Your Pro membership expires in 345 days. Renew early for 10% off.',time:'2d ago',read:true,icon:'💳'},
+  {id:'n5',type:'event',title:'Event Registration Open',desc:'Business Mixer Mumbai – Apr 28. Only 12 seats left!',time:'2d ago',read:true,icon:'🎭'},
+  {id:'n6',type:'referral',title:'Referral Status Update',desc:'Your referral to Ravi Kumar (StyleCo) has been Won! ₹2.5L deal.',time:'3d ago',read:true,icon:'🎉'},
+  {id:'n7',type:'visitor',title:'Visitor Approved',desc:'Your visitor Prashant Mehta has been approved for next meeting.',time:'4d ago',read:true,icon:'👤'},
+  {id:'n8',type:'learning',title:'Course Completed',desc:'You completed GST & Tax Planning FY 2026-27. Download your certificate!',time:'1w ago',read:true,icon:'📜'},
+]
+
+// ─── PAYMENTS ─────────────────────────────────────────────────────────────────
+export const PAYMENTS = [
+  {id:'p1',desc:'Annual Membership – Pro Plan',amount:'₹12,000',date:'Apr 1, 2026',status:'Paid',type:'Membership',invoice:'INV-2026-001',gst:'₹2,160',total:'₹14,160'},
+  {id:'p2',desc:'Event Ticket – Leadership Summit 2026',amount:'₹2,500',date:'Mar 25, 2026',status:'Paid',type:'Event',invoice:'INV-2026-002',gst:'₹450',total:'₹2,950'},
+  {id:'p3',desc:'Annual Membership – Renewal FY25',amount:'₹12,000',date:'Apr 1, 2025',status:'Paid',type:'Membership',invoice:'INV-2025-001',gst:'₹2,160',total:'₹14,160'},
+  {id:'p4',desc:'Learning Course – Public Speaking',amount:'₹1,999',date:'Feb 12, 2026',status:'Paid',type:'Course',invoice:'INV-2026-003',gst:'₹360',total:'₹2,359'},
+  {id:'p5',desc:'Mumbai Mixer Registration',amount:'₹500',date:'Apr 20, 2026',status:'Pending',type:'Event',invoice:'INV-2026-004',gst:'₹90',total:'₹590'},
+]
+
+// ─── ANALYTICS ────────────────────────────────────────────────────────────────
+export const ANALYTICS = {
+  dau:[820,890,940,780,1020,1100,1240],
+  dauLabels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+  monthlyReferrals:[28,34,41,38,52,47,61,58,72,68,85,79],
+  monthlyMembers:[380,392,401,418,435,449,462,478,492,508,524,541],
+  months:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+  conversionRate:34,renewalRate:87,churnRate:8,
+  topReferrers:[{name:'Rajesh Gupta',count:89,value:'₹42L'},{name:'Anita Rao',count:67,value:'₹31L'},{name:'Priya Sharma',count:54,value:'₹24L'},{name:'Vikram Singh',count:48,value:'₹38L'},{name:'Arjun Mehta',count:42,value:'₹18L'}],
+  connectionGrowth:[120,145,167,198,224,251,278,312,348,391,434,482],
+  meetingAttendance:[78,81,79,83,87,82,85,88,84,86,89,91],
+}
+
+// ─── HQ DATA ──────────────────────────────────────────────────────────────────
+export const HQ = {
+  totalCities:28,totalGroups:142,activeMembers:12480,
+  mrr:18500000,arr:222000000,renewalRate:87,growth:23,bizGenerated:680000000,
+  regions:[
+    {name:'West',states:['Maharashtra','Gujarat','Goa'],groups:38,members:3840,revenue:'₹8.2Cr',growth:'+24%',churn:'5%'},
+    {name:'North',states:['Delhi','UP','Haryana','Punjab'],groups:42,members:4200,revenue:'₹9.8Cr',growth:'+19%',churn:'7%'},
+    {name:'South',states:['Karnataka','Telangana','Tamil Nadu','Kerala'],groups:35,members:2980,revenue:'₹6.4Cr',growth:'+31%',churn:'4%'},
+    {name:'East',states:['West Bengal','Odisha','Bihar'],groups:15,members:820,revenue:'₹1.8Cr',growth:'+12%',churn:'9%'},
+    {name:'Central',states:['MP','Rajasthan','Chhattisgarh'],groups:12,members:640,revenue:'₹1.4Cr',growth:'+18%',churn:'6%'},
+  ],
+  cities:[
+    {city:'Delhi',groups:18,members:2100,revenue:'₹3.8Cr',trend:'+24%'},{city:'Mumbai',groups:12,members:1480,revenue:'₹2.4Cr',trend:'+18%'},
+    {city:'Bangalore',groups:10,members:1240,revenue:'₹2.1Cr',trend:'+31%'},{city:'Hyderabad',groups:8,members:980,revenue:'₹1.6Cr',trend:'+22%'},
+    {city:'Pune',groups:9,members:1020,revenue:'₹1.7Cr',trend:'+28%'},{city:'Ahmedabad',groups:11,members:1180,revenue:'₹1.9Cr',trend:'+19%'},
+    {city:'Chennai',groups:7,members:840,revenue:'₹1.4Cr',trend:'+26%'},{city:'Jaipur',groups:5,members:560,revenue:'₹0.9Cr',trend:'+32%'},
+  ],
+  franchises:[
+    {name:'Rajesh Gupta',city:'Delhi',groups:18,members:842,revenue:'₹38.4L',renewal:'87%',status:'active',compliance:'A+'},
+    {name:'Sunita Sharma',city:'Mumbai',groups:12,members:680,revenue:'₹28.2L',renewal:'91%',status:'active',compliance:'A'},
+    {name:'Praveen Nair',city:'Bangalore',groups:10,members:524,revenue:'₹22.1L',renewal:'84%',status:'active',compliance:'B+'},
+    {name:'Meena Reddy',city:'Hyderabad',groups:8,members:412,revenue:'₹16.8L',renewal:'89%',status:'active',compliance:'A'},
+    {name:'Hiral Shah',city:'Ahmedabad',groups:11,members:488,revenue:'₹19.4L',renewal:'82%',status:'active',compliance:'B+'},
+  ],
+  membershipGrowth:[850,880,920,960,1020,1080,1150,1240,1340,1420,1480,1540],
+}
+
+// ─── READBETWEEN DEMO ─────────────────────────────────────────────────────────
+export const RB_DEMOS: Record<string,any> = {
+  message:{power:35,intent:"Soft rejection likely. Vague language + no timeline = classic avoidance. The sender is being polite but uncommitted.",emotion:['Disinterest','Politeness','Avoidance'],manipulation:['Vague Timeline','Non-committal'],strategies:[{label:'Soft',icon:'🤝',text:"Thanks for considering! Happy to share a case study. Can we do a 10-min call?"},{label:'Direct',icon:'🎯',text:"Offer valid until Friday — can we confirm either way?"},{label:'Firm',icon:'⚡',text:"I need to close my schedule this week. Are you in or out?"}]},
+  referral:{power:55,intent:"Genuine need but urgency may be inflated. 'Deadline May 31' is a pressure tactic. Client is likely comparing 2-3 vendors.",emotion:['Urgency','Comparison Shopping','Genuine Need'],manipulation:['Artificial Deadline'],strategies:[{label:'Qualify First',icon:'🎯',text:"Happy to help. Quick question — have you spoken to other CAs? Want to make sure I'm the right fit."},{label:'Value First',icon:'💡',text:"I've handled 20+ similar GST audits. Let me share my approach before we discuss fees."},{label:'Direct Close',icon:'⚡',text:"I can start May 1 and guarantee completion before May 31. Shall we proceed?"}]},
+  bizhub:{power:42,intent:"Serious requirement but vague budget suggests price sensitivity. 'Fast-growing startup' = limited cash. Respond with value, not just price.",emotion:['Genuine Need','Price Sensitivity','Optimism'],manipulation:['Budget Vagueness'],strategies:[{label:'Explore First',icon:'🔍',text:"Interesting requirement. What's your main legal challenge right now — contracts, IP, or compliance?"},{label:'Value Pitch',icon:'💡',text:"I specialise in startup legal at startup-friendly pricing. Happy to do a free 30-min consult first."},{label:'Direct Proposal',icon:'📋',text:"I can offer a ₹12,000/mo retainer covering contracts, 2 IP filings, and compliance reviews. Interested?"}]},
+  meeting:{power:50,intent:"Standard agenda but 'Annual Role Elections' signals political dynamics. Some members may have competing agendas. Prepare for debate.",emotion:['Routine','Political Tension','Ambition'],manipulation:['Hidden Agendas'],strategies:[{label:'Neutral Facilitation',icon:'🤝',text:"Ensure all agenda items have time limits. Put elections after referral round to keep energy positive."},{label:'Pre-align',icon:'🎯',text:"Speak to key members before the meeting to understand positions on elections."},{label:'Power Move',icon:'⚡',text:"Open with top referrer awards to build positive energy before the contentious election discussion."}]},
+  travel:{power:48,intent:"Genuine networking intent. Purpose-driven visit. High openness to connections. 'CIOs' is specific — this person knows what they want.",emotion:['Openness','Ambition','Focus'],manipulation:[],strategies:[{label:'Warm Intro',icon:'🤝',text:"Hey! I know 2 CIOs in Mumbai — happy to make intros over coffee."},{label:'Value Add',icon:'💡',text:"I can connect you with our chapter director who runs CIO circles in Mumbai."},{label:'Direct Meet',icon:'📅',text:"Want to do a quick breakfast meet while you're here? I know the right people."}]},
+  bio:{power:45,intent:"Professional bio with strong credibility signals. '15 years' and named clients build trust. However, 'looking for' angle is unclear — needs a direct ask.",emotion:['Credibility','Openness','Ambiguity'],manipulation:[],strategies:[{label:'Common Ground',icon:'🤝',text:"We both serve B2B clients — I may have referral opportunities for you."},{label:'Specific Ask',icon:'🎯',text:"Do you work with manufacturing clients? I have 3 who need IT solutions right now."},{label:'Learn First',icon:'📖',text:"Would love to understand your current focus area before suggesting a connect."}]},
+}

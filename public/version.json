@@ -1,0 +1,7 @@
+{
+  "version": "3.16.2",
+  "note": "Courses highlighted beside logo; course mega menu loads immediately from bundled 95-course fallback and refreshes live catalog safely",
+  "updatedAt": "2026-08-28",
+  "focus": "course-menu-position-and-loading-reliability",
+  "build": "20260828-course-menu-v316"
+}
