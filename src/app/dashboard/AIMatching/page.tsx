@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import MatchingPage from '../matching/page'
+import MatchingPage from "../matching/page";
 
 export default function AIMatchingPage() {
-  return <MatchingPage />
+  return <MatchingPage />;
 }

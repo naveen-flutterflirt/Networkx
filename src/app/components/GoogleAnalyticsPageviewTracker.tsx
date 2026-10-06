@@ -15,7 +15,11 @@ export default function GoogleAnalyticsPageviewTracker() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    if (typeof window === "undefined" || typeof (window as any).gtag !== "function") return;
+    if (
+      typeof window === "undefined" ||
+      typeof (window as any).gtag !== "function"
+    )
+      return;
     const query = searchParams?.toString();
     (window as any).gtag("event", "page_view", {
       page_path: query ? `${pathname}?${query}` : pathname,

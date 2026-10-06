@@ -1,50 +1,768 @@
-'use client'
-import { useEffect, useMemo, useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faArrowRight, faBriefcase, faBuilding, faCheck, faFileArrowUp, faHandshake, faLightbulb, faLock, faPeopleArrows, faSackDollar, faShieldHalved, faStore, faWandMagicSparkles } from '@fortawesome/free-solid-svg-icons'
-import { ProfileAPI, TokenStore } from '@/lib/api'
-import styles from './funding.module.css'
+"use client";
+import { useEffect, useMemo, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowLeft,
+  faArrowRight,
+  faBriefcase,
+  faBuilding,
+  faCheck,
+  faFileArrowUp,
+  faHandshake,
+  faLightbulb,
+  faLock,
+  faPeopleArrows,
+  faSackDollar,
+  faShieldHalved,
+  faStore,
+  faWandMagicSparkles,
+} from "@fortawesome/free-solid-svg-icons";
+import { ProfileAPI, TokenStore } from "@/lib/api";
+import styles from "./funding.module.css";
 
-type CategoryId='funding'|'cofounder'|'franchise'|'distribution'
-type PathId='raise-funding'|'explore-investments'|'find-cofounder'|'become-cofounder'|'offer-franchise'|'find-franchise'|'find-distributors'|'become-distributor'
-type RequestState={id:string;category:CategoryId;path:PathId;title:string;summary:string;status:'Draft'|'In Review';createdAt:string;deckName?:string}
-const CATEGORIES=[
-  {id:'funding' as CategoryId,icon:faSackDollar,tone:'blue',title:'Investment & Funding',copy:'Raise capital or explore qualified investment opportunities.',paths:[{id:'raise-funding' as PathId,title:'Raise Funding',copy:'Register your business funding requirement.'},{id:'explore-investments' as PathId,title:'Explore Investments',copy:'Share your investment interests and preferences.'}]},
-  {id:'cofounder' as CategoryId,icon:faPeopleArrows,tone:'violet',title:'Founder Matchmaking',copy:'Find the right person to build a business together.',paths:[{id:'find-cofounder' as PathId,title:'Find a Co-founder',copy:'I have a business or idea and need a co-founder.'},{id:'become-cofounder' as PathId,title:'Become a Co-founder',copy:'I want to join an existing venture as a co-founder.'}]},
-  {id:'franchise' as CategoryId,icon:faStore,tone:'orange',title:'Franchise Opportunities',copy:'Expand your brand or explore franchise ownership.',paths:[{id:'offer-franchise' as PathId,title:'Offer a Franchise',copy:'I want franchise partners for my business.'},{id:'find-franchise' as PathId,title:'Find a Franchise',copy:'I want to invest in a franchise business.'}]},
-  {id:'distribution' as CategoryId,icon:faHandshake,tone:'green',title:'Distributor Connect',copy:'Expand your product reach through distribution partnerships.',paths:[{id:'find-distributors' as PathId,title:'Find Distributors',copy:'I need distributors for my products.'},{id:'become-distributor' as PathId,title:'Become a Distributor',copy:'I want products or brands to distribute.'}]},
-]
-const EMPTY_FORM={stage:'',fundingType:'',amount:'',purpose:'',revenue:'',overview:'',markets:'',experience:'',investmentRange:'',role:'',skills:'',businessModel:'',locations:'',products:'',capacity:'',notes:''}
+type CategoryId = "funding" | "cofounder" | "franchise" | "distribution";
+type PathId =
+  | "raise-funding"
+  | "explore-investments"
+  | "find-cofounder"
+  | "become-cofounder"
+  | "offer-franchise"
+  | "find-franchise"
+  | "find-distributors"
+  | "become-distributor";
+type RequestState = {
+  id: string;
+  category: CategoryId;
+  path: PathId;
+  title: string;
+  summary: string;
+  status: "Draft" | "In Review";
+  createdAt: string;
+  deckName?: string;
+};
+const CATEGORIES = [
+  {
+    id: "funding" as CategoryId,
+    icon: faSackDollar,
+    tone: "blue",
+    title: "Investment & Funding",
+    copy: "Raise capital or explore qualified investment opportunities.",
+    paths: [
+      {
+        id: "raise-funding" as PathId,
+        title: "Raise Funding",
+        copy: "Register your business funding requirement.",
+      },
+      {
+        id: "explore-investments" as PathId,
+        title: "Explore Investments",
+        copy: "Share your investment interests and preferences.",
+      },
+    ],
+  },
+  {
+    id: "cofounder" as CategoryId,
+    icon: faPeopleArrows,
+    tone: "violet",
+    title: "Founder Matchmaking",
+    copy: "Find the right person to build a business together.",
+    paths: [
+      {
+        id: "find-cofounder" as PathId,
+        title: "Find a Co-founder",
+        copy: "I have a business or idea and need a co-founder.",
+      },
+      {
+        id: "become-cofounder" as PathId,
+        title: "Become a Co-founder",
+        copy: "I want to join an existing venture as a co-founder.",
+      },
+    ],
+  },
+  {
+    id: "franchise" as CategoryId,
+    icon: faStore,
+    tone: "orange",
+    title: "Franchise Opportunities",
+    copy: "Expand your brand or explore franchise ownership.",
+    paths: [
+      {
+        id: "offer-franchise" as PathId,
+        title: "Offer a Franchise",
+        copy: "I want franchise partners for my business.",
+      },
+      {
+        id: "find-franchise" as PathId,
+        title: "Find a Franchise",
+        copy: "I want to invest in a franchise business.",
+      },
+    ],
+  },
+  {
+    id: "distribution" as CategoryId,
+    icon: faHandshake,
+    tone: "green",
+    title: "Distributor Connect",
+    copy: "Expand your product reach through distribution partnerships.",
+    paths: [
+      {
+        id: "find-distributors" as PathId,
+        title: "Find Distributors",
+        copy: "I need distributors for my products.",
+      },
+      {
+        id: "become-distributor" as PathId,
+        title: "Become a Distributor",
+        copy: "I want products or brands to distribute.",
+      },
+    ],
+  },
+];
+const EMPTY_FORM = {
+  stage: "",
+  fundingType: "",
+  amount: "",
+  purpose: "",
+  revenue: "",
+  overview: "",
+  markets: "",
+  experience: "",
+  investmentRange: "",
+  role: "",
+  skills: "",
+  businessModel: "",
+  locations: "",
+  products: "",
+  capacity: "",
+  notes: "",
+};
 
-export default function FundingCofoundersPage(){
-  TokenStore.getUser()
-  const [profile,setProfile]=useState<any>({}),[category,setCategory]=useState<CategoryId|null>(null),[path,setPath]=useState<PathId|null>(null)
-  const [form,setForm]=useState<any>(EMPTY_FORM),[deck,setDeck]=useState<File|null>(null),[requests,setRequests]=useState<RequestState[]>([]),[message,setMessage]=useState('')
-  useEffect(()=>{ProfileAPI.get().then(setProfile).catch(()=>setProfile({}))},[])
-  useEffect(()=>{try{setRequests(JSON.parse(localStorage.getItem('networkx-growth-requests')||'[]'))}catch{}},[])
-  useEffect(()=>{const requested=new URLSearchParams(window.location.search).get('category');if(CATEGORIES.some(item=>item.id===requested))setCategory(requested as CategoryId)},[])
-  const selectedCategory=CATEGORIES.find(item=>item.id===category), selectedPath=selectedCategory?.paths.find(item=>item.id===path)
-  const business=profile.business_profile||{},company=business.company_name||profile.company||'Not added to profile',industry=business.industry||profile.category||'Not added to profile',location=[profile.city,profile.country].filter(Boolean).join(', ')||'Not added to profile'
-  const isRaising=path==='raise-funding',isCofounder=category==='cofounder',isFranchise=category==='franchise'
-  const formReady=useMemo(()=>{if(!path)return false;if(isRaising)return Boolean(form.stage&&form.fundingType&&form.amount&&form.purpose&&form.overview);if(path==='explore-investments')return Boolean(form.investmentRange&&form.markets&&form.overview);if(isCofounder)return Boolean(form.role&&form.skills&&form.overview);if(isFranchise)return Boolean(form.businessModel&&form.locations&&form.overview);return Boolean(form.products&&form.locations&&form.overview)},[path,form,isRaising,isCofounder,isFranchise])
-  const persist=(status:'Draft'|'In Review')=>{if(!category||!path||!selectedPath)return;if(status==='In Review'&&!formReady){setMessage('Please complete the required fields before submitting.');return}if(status==='In Review'&&isRaising&&!deck){setMessage('A PDF or PPTX pitch deck is required before this funding request can be submitted.');return}const item:RequestState={id:`${Date.now()}`,category,path,title:selectedPath.title,summary:isRaising?`${form.amount||'Funding amount pending'} · ${industry}`:(form.overview||selectedPath.copy).slice(0,90),status,createdAt:new Date().toISOString(),deckName:deck?.name};const next=[item,...requests];setRequests(next);localStorage.setItem('networkx-growth-requests',JSON.stringify(next));setMessage(status==='Draft'?'Draft saved privately.':'Requirement submitted for NetworkX review.');setCategory(null);setPath(null);setForm(EMPTY_FORM);setDeck(null)}
-  const chooseFile=(file?:File)=>{if(!file)return;const ext=file.name.split('.').pop()?.toLowerCase();if(!['pdf','pptx'].includes(ext||'')){setMessage('Please upload a PDF or PPTX file.');return}if(file.size>20*1024*1024){setMessage('Pitch deck must be 20 MB or smaller.');return}setDeck(file);setMessage('')}
-  return <div className={`page ${styles.page}`}>
-    <section className={styles.hero}>
-      <div className={styles.heroContent}><div className={styles.heroBadges}><span className={styles.eyebrow}><FontAwesomeIcon icon={faWandMagicSparkles}/> Funding & Co-Founders</span><span>Powered by <b>NetworkX AI</b></span></div><h1>Your Next Big <b>Opportunity</b><br/><em>Starts Here.</em></h1><p>Find the right people, partners and opportunities to take your business further.</p><div className={styles.trust}><span><FontAwesomeIcon icon={faPeopleArrows}/> Real People</span><span><FontAwesomeIcon icon={faShieldHalved}/> Controlled Opportunities</span><span><FontAwesomeIcon icon={faBriefcase}/> Faster Growth</span><span><FontAwesomeIcon icon={faWandMagicSparkles}/> AI Assisted</span></div></div>
-      <div className={styles.heroMantra}>PEOPLE.<br/>PARTNERSHIPS.<br/>CAPITAL.<br/>MARKETS.<br/>GROWTH.<i/></div>
-    </section>
-    {message&&<div className={styles.notice}>{message}<button onClick={()=>setMessage('')}>×</button></div>}
-    {!category&&<><Header eyebrow="Choose a growth path" title="What would you like to achieve?" copy="Start with one structured requirement. You can track all submissions below." badge="Powered by NetworkX AI"/><div className={styles.categoryGrid}>{CATEGORIES.map(item=><button key={item.id} className={`${styles.category} ${styles[item.tone]}`} onClick={()=>setCategory(item.id)}><i><FontAwesomeIcon icon={item.icon}/></i><span><strong>{item.title}</strong><small>{item.copy}</small></span><FontAwesomeIcon icon={faArrowRight}/></button>)}</div><section className={styles.process}><Header eyebrow="How it works" title="A controlled introduction process"/><div className={styles.steps}>{[['1','Submit your requirement','Complete a focused form and supporting information.'],['2','NetworkX reviews','We check completeness, eligibility and fit.'],['3','AI identifies possibilities','Your requirement is compared with qualified data.'],['4','Introductions with consent','NetworkX approaches relevant parties before connecting you.']].map(step=><div key={step[0]}><i>{step[0]}</i><strong>{step[1]}</strong><p>{step[2]}</p></div>)}</div><p className={styles.disclaimer}>Submitting a requirement does not guarantee a match or introduction.</p></section><section className={styles.myRequests}><Header eyebrow="My growth requests" title="Track your submissions"/>{requests.length?<div className={styles.requestList}>{requests.map(item=><article key={item.id}><i className={styles[item.category]}><FontAwesomeIcon icon={CATEGORIES.find(c=>c.id===item.category)!.icon}/></i><div><strong>{item.title}</strong><p>{item.summary}</p>{item.deckName&&<small><FontAwesomeIcon icon={faFileArrowUp}/> {item.deckName}</small>}</div><span className={item.status==='Draft'?styles.draft:styles.review}>{item.status}</span></article>)}</div>:<div className={styles.empty}><FontAwesomeIcon icon={faLightbulb}/><strong>No growth requests yet</strong><p>Choose a category above to save a draft or submit a requirement.</p></div>}</section></>}
-    {category&&!path&&<section className={styles.selection}><button className={styles.back} onClick={()=>setCategory(null)}><FontAwesomeIcon icon={faArrowLeft}/> All categories</button><div className={styles.selectionTitle}><i className={styles[selectedCategory!.tone]}><FontAwesomeIcon icon={selectedCategory!.icon}/></i><div><span>{selectedCategory!.title}</span><h2>What are you looking for?</h2><p>{selectedCategory!.copy}</p></div></div><div className={styles.pathGrid}>{selectedCategory!.paths.map(item=><button key={item.id} onClick={()=>setPath(item.id)}><i><FontAwesomeIcon icon={selectedCategory!.icon}/></i><span><strong>{item.title}</strong><small>{item.copy}</small></span><FontAwesomeIcon icon={faArrowRight}/></button>)}</div></section>}
-    {category&&path&&<section className={styles.formShell}><div className={styles.formTop}><button className={styles.back} onClick={()=>setPath(null)}><FontAwesomeIcon icon={faArrowLeft}/> Change selection</button><span>Private requirement</span></div><div className={styles.formHeader}><i className={styles[selectedCategory!.tone]}><FontAwesomeIcon icon={selectedCategory!.icon}/></i><div><span>{selectedCategory!.title}</span><h2>{selectedPath!.title}</h2><p>{selectedPath!.copy}</p></div></div><div className={styles.profileStrip}><div><FontAwesomeIcon icon={faBuilding}/><span><small>Company</small><strong>{company}</strong></span></div><div><span><small>Industry</small><strong>{industry}</strong></span></div><div><span><small>Location</small><strong>{location}</strong></span></div><button onClick={()=>window.location.href='/dashboard/profile'}>Update profile</button></div><div className={styles.formGrid}>
-      {isRaising&&<><Field label="Business stage *" type="select" value={form.stage} options={['Idea Stage','MVP / Prototype','Early Revenue','Growth Stage','Established Business']} onChange={v=>setForm({...form,stage:v})}/><Field label="Funding type *" type="select" value={form.fundingType} options={['Equity Investment','Debt Funding','Convertible Instrument','Other / Open to Discussion']} onChange={v=>setForm({...form,fundingType:v})}/><Field label="Funding required *" value={form.amount} placeholder="e.g. ₹5 crore" onChange={v=>setForm({...form,amount:v})}/><Field label="Purpose of funding *" type="select" value={form.purpose} options={['Business Expansion','Product Development','Working Capital','Marketing & Sales','Technology Development','Other']} onChange={v=>setForm({...form,purpose:v})}/><Field label="Annual revenue" type="select" value={form.revenue} options={['Pre-revenue','Below ₹25 lakh','₹25 lakh – ₹1 crore','₹1–5 crore','₹5–25 crore','Above ₹25 crore']} onChange={v=>setForm({...form,revenue:v})}/></>}
-      {path==='explore-investments'&&<><Field label="Investment range *" value={form.investmentRange} placeholder="e.g. ₹25 lakh – ₹1 crore" onChange={v=>setForm({...form,investmentRange:v})}/><Field label="Preferred markets / sectors *" value={form.markets} placeholder="SaaS, manufacturing, consumer…" onChange={v=>setForm({...form,markets:v})}/><Field label="Investment experience" value={form.experience} placeholder="Tell us about your experience" onChange={v=>setForm({...form,experience:v})}/></>}
-      {isCofounder&&<><Field label="Co-founder role *" value={form.role} placeholder="Technical, business, product, growth…" onChange={v=>setForm({...form,role:v})}/><Field label="Skills you need / offer *" value={form.skills} placeholder="Technology, sales, finance, operations…" onChange={v=>setForm({...form,skills:v})}/><Field label="Preferred markets" value={form.markets} placeholder="Cities, countries or industries" onChange={v=>setForm({...form,markets:v})}/></>}
-      {isFranchise&&<><Field label="Business / franchise model *" value={form.businessModel} placeholder="Describe the model and investment level" onChange={v=>setForm({...form,businessModel:v})}/><Field label="Target locations *" value={form.locations} placeholder="Cities, states or countries" onChange={v=>setForm({...form,locations:v})}/><Field label="Investment range" value={form.investmentRange} placeholder="Expected investment" onChange={v=>setForm({...form,investmentRange:v})}/></>}
-      {category==='distribution'&&<><Field label="Products / categories *" value={form.products} placeholder="Products you offer or want to distribute" onChange={v=>setForm({...form,products:v})}/><Field label="Target locations *" value={form.locations} placeholder="Territories or markets" onChange={v=>setForm({...form,locations:v})}/><Field label="Distribution capacity" value={form.capacity} placeholder="Network, warehousing, channels…" onChange={v=>setForm({...form,capacity:v})}/></>}
-      <label className={styles.full}><span>{isRaising?'Business overview *':'Requirement overview *'}</span><textarea rows={4} value={form.overview} onChange={e=>setForm({...form,overview:e.target.value})} placeholder="Provide enough context for the NetworkX review team to understand your requirement."/></label><label className={styles.full}><span>Additional notes</span><textarea rows={2} value={form.notes} onChange={e=>setForm({...form,notes:e.target.value})} placeholder="Anything else our review team should know?"/></label>{isRaising&&<label className={`${styles.upload} ${styles.full}`}><input type="file" accept=".pdf,.pptx" onChange={e=>chooseFile(e.target.files?.[0])}/><i><FontAwesomeIcon icon={deck?faCheck:faFileArrowUp}/></i><span><strong>{deck?deck.name:'Upload pitch deck *'}</strong><small>Required for submission · PDF or PPTX · Maximum 20 MB</small><p>Private by default. Shared externally only with your approval.</p></span></label>}</div><div className={styles.consent}><FontAwesomeIcon icon={faShieldHalved}/><p><strong>Controlled and confidential</strong>Your information is not published to members. AI may categorize the requirement, but NetworkX will not automatically share original documents.</p></div><div className={styles.formActions}><button onClick={()=>persist('Draft')}>Save draft</button><button onClick={()=>persist('In Review')} disabled={!formReady}><FontAwesomeIcon icon={faArrowRight}/> Submit for review</button></div></section>}
-  </div>
+export default function FundingCofoundersPage() {
+  TokenStore.getUser();
+  const [profile, setProfile] = useState<any>({}),
+    [category, setCategory] = useState<CategoryId | null>(null),
+    [path, setPath] = useState<PathId | null>(null);
+  const [form, setForm] = useState<any>(EMPTY_FORM),
+    [deck, setDeck] = useState<File | null>(null),
+    [requests, setRequests] = useState<RequestState[]>([]),
+    [message, setMessage] = useState("");
+  useEffect(() => {
+    ProfileAPI.get()
+      .then(setProfile)
+      .catch(() => setProfile({}));
+  }, []);
+  useEffect(() => {
+    try {
+      setRequests(
+        JSON.parse(localStorage.getItem("networkx-growth-requests") || "[]"),
+      );
+    } catch {}
+  }, []);
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get(
+      "category",
+    );
+    if (CATEGORIES.some((item) => item.id === requested))
+      setCategory(requested as CategoryId);
+  }, []);
+  const selectedCategory = CATEGORIES.find((item) => item.id === category),
+    selectedPath = selectedCategory?.paths.find((item) => item.id === path);
+  const business = profile.business_profile || {},
+    company =
+      business.company_name || profile.company || "Not added to profile",
+    industry = business.industry || profile.category || "Not added to profile",
+    location =
+      [profile.city, profile.country].filter(Boolean).join(", ") ||
+      "Not added to profile";
+  const isRaising = path === "raise-funding",
+    isCofounder = category === "cofounder",
+    isFranchise = category === "franchise";
+  const formReady = useMemo(() => {
+    if (!path) return false;
+    if (isRaising)
+      return Boolean(
+        form.stage &&
+        form.fundingType &&
+        form.amount &&
+        form.purpose &&
+        form.overview,
+      );
+    if (path === "explore-investments")
+      return Boolean(form.investmentRange && form.markets && form.overview);
+    if (isCofounder) return Boolean(form.role && form.skills && form.overview);
+    if (isFranchise)
+      return Boolean(form.businessModel && form.locations && form.overview);
+    return Boolean(form.products && form.locations && form.overview);
+  }, [path, form, isRaising, isCofounder, isFranchise]);
+  const persist = (status: "Draft" | "In Review") => {
+    if (!category || !path || !selectedPath) return;
+    if (status === "In Review" && !formReady) {
+      setMessage("Please complete the required fields before submitting.");
+      return;
+    }
+    if (status === "In Review" && isRaising && !deck) {
+      setMessage(
+        "A PDF or PPTX pitch deck is required before this funding request can be submitted.",
+      );
+      return;
+    }
+    const item: RequestState = {
+      id: `${Date.now()}`,
+      category,
+      path,
+      title: selectedPath.title,
+      summary: isRaising
+        ? `${form.amount || "Funding amount pending"} · ${industry}`
+        : (form.overview || selectedPath.copy).slice(0, 90),
+      status,
+      createdAt: new Date().toISOString(),
+      deckName: deck?.name,
+    };
+    const next = [item, ...requests];
+    setRequests(next);
+    localStorage.setItem("networkx-growth-requests", JSON.stringify(next));
+    setMessage(
+      status === "Draft"
+        ? "Draft saved privately."
+        : "Requirement submitted for NetworkX review.",
+    );
+    setCategory(null);
+    setPath(null);
+    setForm(EMPTY_FORM);
+    setDeck(null);
+  };
+  const chooseFile = (file?: File) => {
+    if (!file) return;
+    const ext = file.name.split(".").pop()?.toLowerCase();
+    if (!["pdf", "pptx"].includes(ext || "")) {
+      setMessage("Please upload a PDF or PPTX file.");
+      return;
+    }
+    if (file.size > 20 * 1024 * 1024) {
+      setMessage("Pitch deck must be 20 MB or smaller.");
+      return;
+    }
+    setDeck(file);
+    setMessage("");
+  };
+  return (
+    <div className={`page ${styles.page}`}>
+      <section className={styles.hero}>
+        <div className={styles.heroContent}>
+          <div className={styles.heroBadges}>
+            <span className={styles.eyebrow}>
+              <FontAwesomeIcon icon={faWandMagicSparkles} /> Funding &
+              Co-Founders
+            </span>
+            <span>
+              Powered by <b>NetworkX AI</b>
+            </span>
+          </div>
+          <h1>
+            Your Next Big <b>Opportunity</b>
+            <br />
+            <em>Starts Here.</em>
+          </h1>
+          <p>
+            Find the right people, partners and opportunities to take your
+            business further.
+          </p>
+          <div className={styles.trust}>
+            <span>
+              <FontAwesomeIcon icon={faPeopleArrows} /> Real People
+            </span>
+            <span>
+              <FontAwesomeIcon icon={faShieldHalved} /> Controlled Opportunities
+            </span>
+            <span>
+              <FontAwesomeIcon icon={faBriefcase} /> Faster Growth
+            </span>
+            <span>
+              <FontAwesomeIcon icon={faWandMagicSparkles} /> AI Assisted
+            </span>
+          </div>
+        </div>
+        <div className={styles.heroMantra}>
+          PEOPLE.
+          <br />
+          PARTNERSHIPS.
+          <br />
+          CAPITAL.
+          <br />
+          MARKETS.
+          <br />
+          GROWTH.
+          <i />
+        </div>
+      </section>
+      {message && (
+        <div className={styles.notice}>
+          {message}
+          <button onClick={() => setMessage("")}>×</button>
+        </div>
+      )}
+      {!category && (
+        <>
+          <Header
+            eyebrow="Choose a growth path"
+            title="What would you like to achieve?"
+            copy="Start with one structured requirement. You can track all submissions below."
+            badge="Powered by NetworkX AI"
+          />
+          <div className={styles.categoryGrid}>
+            {CATEGORIES.map((item) => (
+              <button
+                key={item.id}
+                className={`${styles.category} ${styles[item.tone]}`}
+                onClick={() => setCategory(item.id)}
+              >
+                <i>
+                  <FontAwesomeIcon icon={item.icon} />
+                </i>
+                <span>
+                  <strong>{item.title}</strong>
+                  <small>{item.copy}</small>
+                </span>
+                <FontAwesomeIcon icon={faArrowRight} />
+              </button>
+            ))}
+          </div>
+          <section className={styles.process}>
+            <Header
+              eyebrow="How it works"
+              title="A controlled introduction process"
+            />
+            <div className={styles.steps}>
+              {[
+                [
+                  "1",
+                  "Submit your requirement",
+                  "Complete a focused form and supporting information.",
+                ],
+                [
+                  "2",
+                  "NetworkX reviews",
+                  "We check completeness, eligibility and fit.",
+                ],
+                [
+                  "3",
+                  "AI identifies possibilities",
+                  "Your requirement is compared with qualified data.",
+                ],
+                [
+                  "4",
+                  "Introductions with consent",
+                  "NetworkX approaches relevant parties before connecting you.",
+                ],
+              ].map((step) => (
+                <div key={step[0]}>
+                  <i>{step[0]}</i>
+                  <strong>{step[1]}</strong>
+                  <p>{step[2]}</p>
+                </div>
+              ))}
+            </div>
+            <p className={styles.disclaimer}>
+              Submitting a requirement does not guarantee a match or
+              introduction.
+            </p>
+          </section>
+          <section className={styles.myRequests}>
+            <Header
+              eyebrow="My growth requests"
+              title="Track your submissions"
+            />
+            {requests.length ? (
+              <div className={styles.requestList}>
+                {requests.map((item) => (
+                  <article key={item.id}>
+                    <i className={styles[item.category]}>
+                      <FontAwesomeIcon
+                        icon={
+                          CATEGORIES.find((c) => c.id === item.category)!.icon
+                        }
+                      />
+                    </i>
+                    <div>
+                      <strong>{item.title}</strong>
+                      <p>{item.summary}</p>
+                      {item.deckName && (
+                        <small>
+                          <FontAwesomeIcon icon={faFileArrowUp} />{" "}
+                          {item.deckName}
+                        </small>
+                      )}
+                    </div>
+                    <span
+                      className={
+                        item.status === "Draft" ? styles.draft : styles.review
+                      }
+                    >
+                      {item.status}
+                    </span>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <div className={styles.empty}>
+                <FontAwesomeIcon icon={faLightbulb} />
+                <strong>No growth requests yet</strong>
+                <p>
+                  Choose a category above to save a draft or submit a
+                  requirement.
+                </p>
+              </div>
+            )}
+          </section>
+        </>
+      )}
+      {category && !path && (
+        <section className={styles.selection}>
+          <button className={styles.back} onClick={() => setCategory(null)}>
+            <FontAwesomeIcon icon={faArrowLeft} /> All categories
+          </button>
+          <div className={styles.selectionTitle}>
+            <i className={styles[selectedCategory!.tone]}>
+              <FontAwesomeIcon icon={selectedCategory!.icon} />
+            </i>
+            <div>
+              <span>{selectedCategory!.title}</span>
+              <h2>What are you looking for?</h2>
+              <p>{selectedCategory!.copy}</p>
+            </div>
+          </div>
+          <div className={styles.pathGrid}>
+            {selectedCategory!.paths.map((item) => (
+              <button key={item.id} onClick={() => setPath(item.id)}>
+                <i>
+                  <FontAwesomeIcon icon={selectedCategory!.icon} />
+                </i>
+                <span>
+                  <strong>{item.title}</strong>
+                  <small>{item.copy}</small>
+                </span>
+                <FontAwesomeIcon icon={faArrowRight} />
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+      {category && path && (
+        <section className={styles.formShell}>
+          <div className={styles.formTop}>
+            <button className={styles.back} onClick={() => setPath(null)}>
+              <FontAwesomeIcon icon={faArrowLeft} /> Change selection
+            </button>
+            <span>Private requirement</span>
+          </div>
+          <div className={styles.formHeader}>
+            <i className={styles[selectedCategory!.tone]}>
+              <FontAwesomeIcon icon={selectedCategory!.icon} />
+            </i>
+            <div>
+              <span>{selectedCategory!.title}</span>
+              <h2>{selectedPath!.title}</h2>
+              <p>{selectedPath!.copy}</p>
+            </div>
+          </div>
+          <div className={styles.profileStrip}>
+            <div>
+              <FontAwesomeIcon icon={faBuilding} />
+              <span>
+                <small>Company</small>
+                <strong>{company}</strong>
+              </span>
+            </div>
+            <div>
+              <span>
+                <small>Industry</small>
+                <strong>{industry}</strong>
+              </span>
+            </div>
+            <div>
+              <span>
+                <small>Location</small>
+                <strong>{location}</strong>
+              </span>
+            </div>
+            <button
+              onClick={() => (window.location.href = "/dashboard/profile")}
+            >
+              Update profile
+            </button>
+          </div>
+          <div className={styles.formGrid}>
+            {isRaising && (
+              <>
+                <Field
+                  label="Business stage *"
+                  type="select"
+                  value={form.stage}
+                  options={[
+                    "Idea Stage",
+                    "MVP / Prototype",
+                    "Early Revenue",
+                    "Growth Stage",
+                    "Established Business",
+                  ]}
+                  onChange={(v) => setForm({ ...form, stage: v })}
+                />
+                <Field
+                  label="Funding type *"
+                  type="select"
+                  value={form.fundingType}
+                  options={[
+                    "Equity Investment",
+                    "Debt Funding",
+                    "Convertible Instrument",
+                    "Other / Open to Discussion",
+                  ]}
+                  onChange={(v) => setForm({ ...form, fundingType: v })}
+                />
+                <Field
+                  label="Funding required *"
+                  value={form.amount}
+                  placeholder="e.g. ₹5 crore"
+                  onChange={(v) => setForm({ ...form, amount: v })}
+                />
+                <Field
+                  label="Purpose of funding *"
+                  type="select"
+                  value={form.purpose}
+                  options={[
+                    "Business Expansion",
+                    "Product Development",
+                    "Working Capital",
+                    "Marketing & Sales",
+                    "Technology Development",
+                    "Other",
+                  ]}
+                  onChange={(v) => setForm({ ...form, purpose: v })}
+                />
+                <Field
+                  label="Annual revenue"
+                  type="select"
+                  value={form.revenue}
+                  options={[
+                    "Pre-revenue",
+                    "Below ₹25 lakh",
+                    "₹25 lakh – ₹1 crore",
+                    "₹1–5 crore",
+                    "₹5–25 crore",
+                    "Above ₹25 crore",
+                  ]}
+                  onChange={(v) => setForm({ ...form, revenue: v })}
+                />
+              </>
+            )}
+            {path === "explore-investments" && (
+              <>
+                <Field
+                  label="Investment range *"
+                  value={form.investmentRange}
+                  placeholder="e.g. ₹25 lakh – ₹1 crore"
+                  onChange={(v) => setForm({ ...form, investmentRange: v })}
+                />
+                <Field
+                  label="Preferred markets / sectors *"
+                  value={form.markets}
+                  placeholder="SaaS, manufacturing, consumer…"
+                  onChange={(v) => setForm({ ...form, markets: v })}
+                />
+                <Field
+                  label="Investment experience"
+                  value={form.experience}
+                  placeholder="Tell us about your experience"
+                  onChange={(v) => setForm({ ...form, experience: v })}
+                />
+              </>
+            )}
+            {isCofounder && (
+              <>
+                <Field
+                  label="Co-founder role *"
+                  value={form.role}
+                  placeholder="Technical, business, product, growth…"
+                  onChange={(v) => setForm({ ...form, role: v })}
+                />
+                <Field
+                  label="Skills you need / offer *"
+                  value={form.skills}
+                  placeholder="Technology, sales, finance, operations…"
+                  onChange={(v) => setForm({ ...form, skills: v })}
+                />
+                <Field
+                  label="Preferred markets"
+                  value={form.markets}
+                  placeholder="Cities, countries or industries"
+                  onChange={(v) => setForm({ ...form, markets: v })}
+                />
+              </>
+            )}
+            {isFranchise && (
+              <>
+                <Field
+                  label="Business / franchise model *"
+                  value={form.businessModel}
+                  placeholder="Describe the model and investment level"
+                  onChange={(v) => setForm({ ...form, businessModel: v })}
+                />
+                <Field
+                  label="Target locations *"
+                  value={form.locations}
+                  placeholder="Cities, states or countries"
+                  onChange={(v) => setForm({ ...form, locations: v })}
+                />
+                <Field
+                  label="Investment range"
+                  value={form.investmentRange}
+                  placeholder="Expected investment"
+                  onChange={(v) => setForm({ ...form, investmentRange: v })}
+                />
+              </>
+            )}
+            {category === "distribution" && (
+              <>
+                <Field
+                  label="Products / categories *"
+                  value={form.products}
+                  placeholder="Products you offer or want to distribute"
+                  onChange={(v) => setForm({ ...form, products: v })}
+                />
+                <Field
+                  label="Target locations *"
+                  value={form.locations}
+                  placeholder="Territories or markets"
+                  onChange={(v) => setForm({ ...form, locations: v })}
+                />
+                <Field
+                  label="Distribution capacity"
+                  value={form.capacity}
+                  placeholder="Network, warehousing, channels…"
+                  onChange={(v) => setForm({ ...form, capacity: v })}
+                />
+              </>
+            )}
+            <label className={styles.full}>
+              <span>
+                {isRaising ? "Business overview *" : "Requirement overview *"}
+              </span>
+              <textarea
+                rows={4}
+                value={form.overview}
+                onChange={(e) => setForm({ ...form, overview: e.target.value })}
+                placeholder="Provide enough context for the NetworkX review team to understand your requirement."
+              />
+            </label>
+            <label className={styles.full}>
+              <span>Additional notes</span>
+              <textarea
+                rows={2}
+                value={form.notes}
+                onChange={(e) => setForm({ ...form, notes: e.target.value })}
+                placeholder="Anything else our review team should know?"
+              />
+            </label>
+            {isRaising && (
+              <label className={`${styles.upload} ${styles.full}`}>
+                <input
+                  type="file"
+                  accept=".pdf,.pptx"
+                  onChange={(e) => chooseFile(e.target.files?.[0])}
+                />
+                <i>
+                  <FontAwesomeIcon icon={deck ? faCheck : faFileArrowUp} />
+                </i>
+                <span>
+                  <strong>{deck ? deck.name : "Upload pitch deck *"}</strong>
+                  <small>
+                    Required for submission · PDF or PPTX · Maximum 20 MB
+                  </small>
+                  <p>
+                    Private by default. Shared externally only with your
+                    approval.
+                  </p>
+                </span>
+              </label>
+            )}
+          </div>
+          <div className={styles.consent}>
+            <FontAwesomeIcon icon={faShieldHalved} />
+            <p>
+              <strong>Controlled and confidential</strong>Your information is
+              not published to members. AI may categorize the requirement, but
+              NetworkX will not automatically share original documents.
+            </p>
+          </div>
+          <div className={styles.formActions}>
+            <button onClick={() => persist("Draft")}>Save draft</button>
+            <button onClick={() => persist("In Review")} disabled={!formReady}>
+              <FontAwesomeIcon icon={faArrowRight} /> Submit for review
+            </button>
+          </div>
+        </section>
+      )}
+    </div>
+  );
 }
-function Header({eyebrow,title,copy,badge}:{eyebrow:string,title:string,copy?:string,badge?:string}){return <div className={styles.sectionHead}><div><span>{eyebrow}</span><h2>{title}</h2>{copy&&<p>{copy}</p>}</div>{badge&&<div className={styles.powered}><FontAwesomeIcon icon={faWandMagicSparkles}/> {badge}</div>}</div>}
-function Field({label,value,onChange,placeholder='',type='text',options=[]}:{label:string,value:string,onChange:(value:string)=>void,placeholder?:string,type?:string,options?:string[]}){return <label><span>{label}</span>{type==='select'?<select value={value} onChange={e=>onChange(e.target.value)}><option value="">Select an option</option>{options.map(option=><option key={option}>{option}</option>)}</select>:<input value={value} onChange={e=>onChange(e.target.value)} placeholder={placeholder}/>}</label>}
+function Header({
+  eyebrow,
+  title,
+  copy,
+  badge,
+}: {
+  eyebrow: string;
+  title: string;
+  copy?: string;
+  badge?: string;
+}) {
+  return (
+    <div className={styles.sectionHead}>
+      <div>
+        <span>{eyebrow}</span>
+        <h2>{title}</h2>
+        {copy && <p>{copy}</p>}
+      </div>
+      {badge && (
+        <div className={styles.powered}>
+          <FontAwesomeIcon icon={faWandMagicSparkles} /> {badge}
+        </div>
+      )}
+    </div>
+  );
+}
+function Field({
+  label,
+  value,
+  onChange,
+  placeholder = "",
+  type = "text",
+  options = [],
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  type?: string;
+  options?: string[];
+}) {
+  return (
+    <label>
+      <span>{label}</span>
+      {type === "select" ? (
+        <select value={value} onChange={(e) => onChange(e.target.value)}>
+          <option value="">Select an option</option>
+          {options.map((option) => (
+            <option key={option}>{option}</option>
+          ))}
+        </select>
+      ) : (
+        <input
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+        />
+      )}
+    </label>
+  );
+}

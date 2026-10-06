@@ -12,13 +12,21 @@ const GA_MEASUREMENT_ID = "G-163B04KTX6";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.networkxcircle.com"),
   title: "NetworkX | World's FIrst AI-Powered Business Growth Community",
-  description: "Learn, build and evolve with NetworkX—the global online business platform for meaningful connections, smarter networking and real opportunities.",
+  description:
+    "Learn, build and evolve with NetworkX—the global online business platform for meaningful connections, smarter networking and real opportunities.",
   icons: { icon: "/brand/favicon.png" },
   openGraph: {
     title: "NetworkX | World's FIrst AI-Powered Business Growth Community",
     description: "Learn. Build. Evolve.",
     type: "website",
-    images: [{ url: "/images/og-v3.jpg", width: 1200, height: 630, alt: "NetworkX — World's FIrst AI-Powered Business Growth Community." }],
+    images: [
+      {
+        url: "/images/og-v3.jpg",
+        width: 1200,
+        height: 630,
+        alt: "NetworkX — World's FIrst AI-Powered Business Growth Community.",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -28,12 +36,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
@@ -43,10 +57,16 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             running both at once can produce duplicate/conflicting styles.
             If you keep this CDN script, consider removing that @import
             line from globals.css to avoid the two fighting each other. */}
-        <Script src="https://cdn.tailwindcss.com" strategy="beforeInteractive" />
+        <Script
+          src="https://cdn.tailwindcss.com"
+          strategy="beforeInteractive"
+        />
 
         {/* Google tag (gtag.js) */}
-        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="afterInteractive" />
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
         <Script id="gtag-init" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];

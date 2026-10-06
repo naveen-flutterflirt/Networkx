@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -54,7 +54,10 @@ export default function InsightArticleShell() {
     setSlug(parts[parts.length - 1] || null);
   }, [pathname]);
 
-  const insight: { title: string; seoTitle?: string; [key: string]: any } | undefined = slug ? getInsight(slug) : undefined;
+  const insight:
+    { title: string; seoTitle?: string; [key: string]: any } | undefined = slug
+    ? getInsight(slug)
+    : undefined;
   const content = slug ? insightContent[slug] : undefined;
 
   useEffect(() => {
@@ -67,7 +70,9 @@ export default function InsightArticleShell() {
     return (
       <main className="insights-page insight-article-page">
         <InsightsHeader />
-        <div style={{ padding: "120px 24px", textAlign: "center" }}>Loading…</div>
+        <div style={{ padding: "120px 24px", textAlign: "center" }}>
+          Loading…
+        </div>
         <Footer />
       </main>
     );
@@ -79,7 +84,10 @@ export default function InsightArticleShell() {
         <InsightsHeader />
         <div style={{ padding: "120px 24px", textAlign: "center" }}>
           <h1>Article not found</h1>
-          <p>We couldn't find that resource. <Link href="/resources">Browse all resources →</Link></p>
+          <p>
+            We couldn't find that resource.{" "}
+            <Link href="/resources">Browse all resources →</Link>
+          </p>
         </div>
         <Footer />
       </main>
@@ -95,40 +103,98 @@ export default function InsightArticleShell() {
     description: insight.metaDescription,
     image: `${siteUrl}${insight.ogImage}`,
     author: { "@type": "Organization", name: "NetworkX" },
-    publisher: { "@type": "Organization", name: "NetworkX", logo: { "@type": "ImageObject", url: `${siteUrl}/brand/networkx-logo-header.png` } },
+    publisher: {
+      "@type": "Organization",
+      name: "NetworkX",
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/brand/networkx-logo-header.png`,
+      },
+    },
     mainEntityOfPage: canonical,
   };
 
   return (
     <main className="insights-page insight-article-page">
       <InsightsHeader />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <article className="insight-article">
-        <nav className="insight-breadcrumbs" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><Link href="/resources">Resources</Link><span>/</span><b>{insight.category}</b></nav>
+        <nav className="insight-breadcrumbs" aria-label="Breadcrumb">
+          <Link href="/">Home</Link>
+          <span>/</span>
+          <Link href="/resources">Resources</Link>
+          <span>/</span>
+          <b>{insight.category}</b>
+        </nav>
         <header className="insight-article-header">
           <span className="insight-article-category">{insight.category}</span>
           <h1>{insight.h1}</h1>
           <p>{insight.excerpt}</p>
-          <div><span>By NetworkX</span><i /> <span>{insight.readingTime}</span></div>
+          <div>
+            <span>By NetworkX</span>
+            <i /> <span>{insight.readingTime}</span>
+          </div>
         </header>
-        <div className="insight-article-cover"><Image src={insight.cover} alt={`${insight.title} cover illustration`} fill priority sizes="(max-width: 900px) 100vw, 1080px" /></div>
+        <div className="insight-article-cover">
+          <Image
+            src={insight.cover}
+            alt={`${insight.title} cover illustration`}
+            fill
+            priority
+            sizes="(max-width: 900px) 100vw, 1080px"
+          />
+        </div>
         <div className="insight-article-body">
           {content.map((section, index) => (
             <section key={`${section.heading ?? "introduction"}-${index}`}>
               {section.heading && <h2>{section.heading}</h2>}
-              {section.paragraphs?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-              {section.list && <ul>{section.list.map((item) => <li key={item}>{item}</li>)}</ul>}
+              {section.paragraphs?.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+              {section.list && (
+                <ul>
+                  {section.list.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              )}
               {section.emphasis && <blockquote>{section.emphasis}</blockquote>}
             </section>
           ))}
-          <nav className="insight-topic-links" aria-label="Explore NetworkX features">
+          <nav
+            className="insight-topic-links"
+            aria-label="Explore NetworkX features"
+          >
             <span>Explore related NetworkX experiences</span>
-            <div><Link href="/#solutions">AI matchmaking</Link><Link href="/#global-community">Global community</Link><Link href="/#membership">Memberships</Link></div>
+            <div>
+              <Link href="/#solutions">AI matchmaking</Link>
+              <Link href="/#global-community">Global community</Link>
+              <Link href="/#membership">Memberships</Link>
+            </div>
           </nav>
-          <aside className="insight-inline-cta"><span>Explore NetworkX</span><h2>Build smarter connections and discover relevant opportunities.</h2><Link href="/#membership">Explore Memberships →</Link></aside>
+          <aside className="insight-inline-cta">
+            <span>Explore NetworkX</span>
+            <h2>
+              Build smarter connections and discover relevant opportunities.
+            </h2>
+            <Link href="/#membership">Explore Memberships →</Link>
+          </aside>
         </div>
       </article>
-      <section className="related-insights"><header><span>Keep exploring</span><h2>Related resources</h2></header><div>{related.map((item) => <InsightCard insight={item} key={item.slug} />)}</div></section>
+      <section className="related-insights">
+        <header>
+          <span>Keep exploring</span>
+          <h2>Related resources</h2>
+        </header>
+        <div>
+          {related.map((item) => (
+            <InsightCard insight={item} key={item.slug} />
+          ))}
+        </div>
+      </section>
       <Footer />
     </main>
   );

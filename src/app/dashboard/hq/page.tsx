@@ -1,6 +1,8 @@
-'use client'
-import { useEffect } from 'react'
+"use client";
+import { useEffect } from "react";
 export default function HQPage() {
-  useEffect(() => { window.location.href = '/dashboard' }, [])
-  return null
+  useEffect(() => {
+    window.location.href = "/dashboard";
+  }, []);
+  return null;
 }

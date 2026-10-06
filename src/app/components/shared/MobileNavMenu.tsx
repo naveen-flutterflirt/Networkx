@@ -8,13 +8,17 @@ import { useEffect, useRef } from "react";
 // and on Escape.
 export default function MobileNavMenu() {
   const ref = useRef<HTMLDetailsElement>(null);
-  const close = () => { if (ref.current) ref.current.open = false; };
+  const close = () => {
+    if (ref.current) ref.current.open = false;
+  };
 
   useEffect(() => {
     const onPointerDown = (e: PointerEvent) => {
       if (ref.current?.open && !ref.current.contains(e.target as Node)) close();
     };
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") close(); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+    };
     document.addEventListener("pointerdown", onPointerDown);
     document.addEventListener("keydown", onKey);
     return () => {
@@ -25,16 +29,27 @@ export default function MobileNavMenu() {
 
   return (
     <details className="mobile-menu" ref={ref}>
-      <summary aria-label="Open navigation"><i /><i /></summary>
-      <nav onClick={(e) => { if ((e.target as HTMLElement).closest("a")) close(); }}>
+      <summary aria-label="Open navigation">
+        <i />
+        <i />
+      </summary>
+      <nav
+        onClick={(e) => {
+          if ((e.target as HTMLElement).closest("a")) close();
+        }}
+      >
         <Link href="/about">About</Link>
         <a href="/#solutions">Solutions</a>
         <a href="/#community">Community</a>
         <Link href="/resources">Resources</Link>
         <Link href="/pricing">Pricing</Link>
         <a href="/#contact">Contact</a>
-        <a className="mobile-login" href="/login">Log in</a>
-        <Link className="mobile-join" href="/pricing">Join NetworkX</Link>
+        <a className="mobile-login" href="/login">
+          Log in
+        </a>
+        <Link className="mobile-join" href="/pricing">
+          Join NetworkX
+        </Link>
       </nav>
     </details>
   );
