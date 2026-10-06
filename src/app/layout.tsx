@@ -5,6 +5,11 @@ import LocalhostCanonicalRedirect from "./components/LocalhostCanonicalRedirect"
 import GoogleAnalyticsPageviewTracker from "./components/GoogleAnalyticsPageviewTracker";
 import "./globals.css";
 
+// Fix FontAwesome SSR (prevents giant icons on page refresh)
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false;
+
 // GA4 measurement ID — public by design (meant to be embedded
 // client-side), not a secret, safe to hardcode here.
 const GA_MEASUREMENT_ID = "G-163B04KTX6";

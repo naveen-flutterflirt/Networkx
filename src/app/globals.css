@@ -40,13 +40,13 @@
 }
 .about-hero {
   position: relative;
-  width: min(1400px, calc(100% - 64px));
-  min-height: 700px;
-  margin: 35px auto 80px;
+  width: min(1200px, calc(100% - 64px));
+  min-height: 500px;
+  margin: 100px auto 120px;
   display: grid;
-  grid-template-columns: 0.88fr 1.12fr;
+  grid-template-columns: 0.9fr 1.1fr;
   align-items: center;
-  gap: 70px;
+  gap: 60px;
 }
 .about-hero::before {
   content: "";
@@ -65,10 +65,10 @@
   z-index: 2;
 }
 .about-hero h1 {
-  margin: 24px 0;
-  font-size: clamp(58px, 6.2vw, 96px);
-  line-height: 0.96;
-  letter-spacing: -0.055em;
+  margin: 20px 0;
+  font-size: clamp(48px, 5vw, 76px);
+  line-height: 1;
+  letter-spacing: -0.04em;
 }
 .about-hero h1 em,
 .global-intro h2 em {
@@ -76,11 +76,11 @@
   font-style: normal;
 }
 .about-hero-copy > p {
-  max-width: 610px;
+  max-width: 540px;
   margin: 0;
   color: var(--muted);
-  font-size: 18px;
-  line-height: 1.75;
+  font-size: 16px;
+  line-height: 1.6;
 }
 .about-hero-actions {
   margin-top: 38px;
@@ -121,19 +121,15 @@
 .about-hero-photo {
   position: relative;
   z-index: 2;
-  height: 620px;
+  height: 520px;
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 32px;
+  border-radius: 24px;
   background: var(--panel);
-  box-shadow: 0 35px 100px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.08);
 }
 .about-hero-photo::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, transparent 52%, var(--panel));
+  display: none;
 }
 .about-hero-photo > img {
   width: 100%;
@@ -144,15 +140,21 @@
 .about-photo-caption {
   position: absolute;
   z-index: 2;
-  left: 34px;
-  right: 34px;
+  left: 28px;
+  right: 28px;
   bottom: 28px;
   display: flex;
   align-items: center;
   gap: 18px;
-  color: var(--muted);
-  font-size: 12px;
+  color: var(--ink);
+  font-size: 13px;
   line-height: 1.5;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  padding: 18px 24px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 .about-photo-caption svg {
   width: 32px;
@@ -662,30 +664,25 @@ main {
 }
 
 .button {
-  min-height: 54px;
-  padding: 0 25px;
+  min-height: 52px;
+  padding: 0 24px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 30px;
+  gap: 12px;
   border: 1px solid var(--orange);
-  border-radius: 9px;
-  background: linear-gradient(135deg, #ff5c12, #ef3900);
-  color: var(--ink);
-  font-size: 12px;
-  font-weight: 700;
-  box-shadow:
-    0 8px 28px rgba(255, 75, 10, 0.32),
-    inset 0 1px rgba(255, 255, 255, 0.18);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  border-radius: 12px;
+  background: var(--orange);
+  color: var(--panel);
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--orange) 30%, transparent);
+  transition: all 0.2s ease;
 }
 .button:hover {
   transform: translateY(-2px);
-  box-shadow:
-    0 13px 34px rgba(255, 75, 10, 0.4),
-    inset 0 1px rgba(255, 255, 255, 0.18);
+  background: color-mix(in srgb, var(--orange) 90%, black);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--orange) 40%, transparent);
 }
 .button-small {
   min-height: 54px;
@@ -695,13 +692,15 @@ main {
   font-size: 15px;
 }
 .button-secondary {
-  border-color: 1px solid var(--line);
+  border: 1px solid var(--line);
   background: var(--panel);
-  box-shadow: inset 0 0 20px rgba(35, 101, 170, 0.08);
+  color: var(--ink);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 .button-secondary:hover {
-  background: var(--panel);
-  box-shadow: none;
+  background: var(--night-2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .hero {
@@ -5594,13 +5593,13 @@ footer {
   min-width: 150px;
   padding: 10px 17px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #ff6a20, #ef3900);
-  color: var(--ink);
+  background: var(--orange);
+  color: var(--panel);
   text-align: center;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 600;
   letter-spacing: 0.5px;
-  box-shadow: 0 10px 28px rgba(255, 75, 10, 0.34);
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--orange) 34%, transparent);
 }
 .plan-name {
   color: var(--ink);

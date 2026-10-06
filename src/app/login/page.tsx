@@ -256,11 +256,7 @@ export default function LoginPage() {
       <Header />
 
       <div
-        className="min-h-screen relative overflow-hidden text-white"
-        style={{
-          background:
-            "radial-gradient(circle at 76% 40%, rgba(0,104,232,.12), transparent 36%), linear-gradient(115deg, #020914 0%, var(--night) 48%, #03101d 100%)",
-        }}
+        className="min-h-[calc(100vh-140px)] relative overflow-hidden text-[var(--ink)] bg-[var(--night)] pt-28 pb-24"
       >
         {/* Bug fix: gridTemplateColumns was set via inline style, which
             ALWAYS overrides a CSS class regardless of specificity or media
@@ -271,18 +267,18 @@ export default function LoginPage() {
             narrower than ~840px total. Moved into a real Tailwind
             arbitrary-value grid-cols-[...] class instead, so the
             max-[1180px]: breakpoint can actually override it as intended. */}
-        <div className="max-w-[1200px] mx-auto relative z-[1] min-h-screen grid gap-7 items-start p-[150px_26px_40px] grid-cols-[minmax(0,1.25fr)_minmax(380px,460px)] max-[1180px]:grid-cols-1 max-[1180px]:p-[110px_18px_24px] max-[540px]:p-[100px_12px_20px]">
+        <div className="max-w-[1200px] w-full mx-auto relative z-[1] grid gap-12 items-center p-[20px_26px_60px] grid-cols-[minmax(0,1.25fr)_minmax(380px,460px)] max-[1180px]:grid-cols-1 max-[1180px]:p-[40px_18px_60px] max-[540px]:p-[40px_12px_40px]">
           {/* ── LEFT: hero copy ─────────────────────────────────────── */}
           <section className="min-w-0 p-[8px_4px_8px_18px] max-[1180px]:order-1">
-            <h1 className="text-[clamp(40px,4.8vw,66px)] leading-[.99] tracking-[-2px] font-extrabold mb-6 max-[720px]:text-[clamp(34px,10vw,48px)]">
+            <h1 className="text-[clamp(32px,4vw,56px)] leading-[.99] tracking-[-2px] font-extrabold mb-6 max-[720px]:text-[clamp(34px,10vw,48px)]">
               Conversations to
               <br />
               Collaborations
               <br />
-              <em className="not-italic text-orange">Meet, Connect & Grow</em>
+              <em className="not-italic text-[var(--orange)]">Meet, Connect & Grow</em>
             </h1>
 
-            <p className="max-w-[560px] text-[17px] leading-[1.72] mb-7 text-[#e0e5eb] max-[720px]:text-[15px]">
+            <p className="max-w-[560px] text-[17px] leading-[1.72] mb-7 text-[var(--muted)] max-[720px]:text-[15px]">
               Connect with business leaders, exchange referrals, attend
               exclusive events, and grow your business — city by city, group by
               group.
@@ -293,11 +289,11 @@ export default function LoginPage() {
               {WHY_JOIN.map((item) => (
                 <div key={item.text} className="flex items-center gap-3">
                   <span
-                    className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center bg-white/[.06] ${item.tone}`}
+                    className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center bg-white border border-[var(--line)] ${item.tone}`}
                   >
                     <FontAwesomeIcon icon={item.icon} />
                   </span>
-                  <span className="text-sm text-[#e0e5eb]">{item.text}</span>
+                  <span className="text-sm text-[var(--muted)]">{item.text}</span>
                 </div>
               ))}
             </div>
@@ -307,7 +303,7 @@ export default function LoginPage() {
                 {AV_INIT.map((av, i) => (
                   <div
                     key={i}
-                    className="w-[42px] h-[42px] rounded-full border-2 border-[var(--night)] flex items-center justify-center text-white text-[11px] font-bold relative"
+                    className="w-[42px] h-[42px] rounded-full border-2 border-[var(--line)] flex items-center justify-center text-[var(--ink)] text-[11px] font-bold relative"
                     style={{
                       background: AV_COLORS[i],
                       zIndex: AV_INIT.length - i,
@@ -319,11 +315,11 @@ export default function LoginPage() {
                 ))}
               </div>
               <div className="min-w-0">
-                <div className="text-base font-bold text-white">
-                  Trusted by <span className="text-orange">12,500+</span>{" "}
+                <div className="text-base font-bold text-[var(--ink)]">
+                  Trusted by <span className="text-[var(--orange)]">12,500+</span>{" "}
                   professionals
                 </div>
-                <div className="mt-1 text-sm text-[#e0e5eb]/70">
+                <div className="mt-1 text-sm text-[var(--muted)]/70">
                   ★★★★★{" "}
                   <strong className="text-amber-400 font-extrabold">4.9</strong>
                   /5 rating
@@ -334,9 +330,9 @@ export default function LoginPage() {
             {/* <div className="grid grid-cols-5 gap-3 max-[1400px]:grid-cols-3 max-[720px]:grid-cols-2 max-[540px]:grid-cols-1">
               {STATS.map((item) => (
                 <div key={item.label} className="min-h-[120px] rounded-[18px] p-[16px_12px] text-center bg-[linear-gradient(180deg,rgba(18,20,36,.92),rgba(12,14,27,.88))] border border-white/[.08]">
-                  <FontAwesomeIcon icon={item.icon} className="text-lg mb-2 text-white/80"/>
-                  <div className="text-base font-extrabold text-white">{item.value}</div>
-                  <div className="mt-1 text-[11px] leading-[1.4] text-white/[.42]">{item.label}</div>
+                  <FontAwesomeIcon icon={item.icon} className="text-lg mb-2 text-[var(--ink)]/80"/>
+                  <div className="text-base font-extrabold text-[var(--ink)]">{item.value}</div>
+                  <div className="mt-1 text-[11px] leading-[1.4] text-[var(--ink)]/[.42]">{item.label}</div>
                 </div>
               ))}
             </div> */}
@@ -347,28 +343,25 @@ export default function LoginPage() {
             className="w-full max-w-[410px] justify-self-end max-[1180px]:justify-self-center"
             id="login-form"
           >
-            <div className="w-full rounded-[24px] p-[28px] bg-[linear-gradient(165deg,rgba(17,20,34,.97),rgba(10,12,22,.98))] border border-white/[.09] shadow-[0_24px_70px_rgba(0,0,0,.36),inset_0_1px_0_rgba(255,255,255,.04)]">
+            <div className="w-full rounded-[24px] p-[28px] bg-[var(--panel)] border border-[var(--line)] shadow-[0_24px_70px_rgba(0,0,0,.08)]">
               <div className="flex items-center gap-3 mb-5">
-                <span className="flex-shrink-0 w-11 h-11 rounded-[13px] flex items-center justify-center bg-[linear-gradient(135deg,#ff5c12,#ef3900)] shadow-[0_8px_20px_rgba(255,75,10,.28)]">
-                  <FontAwesomeIcon
-                    icon={faShieldHeart}
-                    className="text-white text-lg"
-                  />
+                <span className="flex-shrink-0 w-11 h-11 rounded-[13px] flex items-center justify-center bg-[var(--orange)] text-[var(--panel)] shadow-sm">
+                  <FontAwesomeIcon icon={faShieldHeart} className="text-[var(--panel)] text-lg" />
                 </span>
                 <div className="min-w-0">
-                  <div className="text-[21px] font-extrabold text-white leading-tight">
+                  <div className="text-[21px] font-extrabold text-[var(--ink)] leading-tight">
                     Welcome back
                   </div>
-                  <div className="text-[12.5px] text-white/[.44]">
+                  <div className="text-[12.5px] text-[var(--ink)]/[.44]">
                     Sign in to your NetworkX account
                   </div>
                 </div>
               </div>
 
-              <div className="relative flex gap-1 p-1 rounded-xl mb-5 bg-white/[.04] border border-white/[.06]">
+              <div className="relative flex gap-1 p-1 rounded-xl mb-5 bg-[var(--night)] border border-[var(--line)]">
                 <span
                   aria-hidden="true"
-                  className="absolute top-1 bottom-1 rounded-[10px] bg-[linear-gradient(135deg,#ff5c12,#ef3900)] shadow-[0_4px_14px_rgba(255,75,10,.3)] transition-transform duration-200 ease-out"
+                  className="absolute top-1 bottom-1 rounded-[10px] bg-[var(--orange)] shadow-sm transition-transform duration-200 ease-out"
                   style={{
                     width: "calc(50% - 4px)",
                     transform:
@@ -378,14 +371,14 @@ export default function LoginPage() {
                   }}
                 />
                 <button
-                  className={`relative z-[1] flex-1 border-none rounded-[10px] py-2.5 px-2 text-[13px] font-bold cursor-pointer transition-colors duration-150 ${tab === "password" ? "text-white" : "text-white/40 hover:text-white/70"}`}
+                  className={`relative z-[1] flex-1 border-none rounded-[10px] py-2.5 px-2 text-[13px] font-bold cursor-pointer transition-colors duration-150 ${tab === "password" ? "text-[var(--panel)]" : "text-[var(--ink)]/40 hover:text-[var(--ink)]/70"}`}
                   onClick={() => switchTab("password")}
                   type="button"
                 >
                   <FontAwesomeIcon icon={faKey} className="mr-1.5" /> Password
                 </button>
                 <button
-                  className={`relative z-[1] flex-1 border-none rounded-[10px] py-2.5 px-2 text-[13px] font-bold cursor-pointer transition-colors duration-150 ${tab === "otp" ? "text-white" : "text-white/40 hover:text-white/70"}`}
+                  className={`relative z-[1] flex-1 border-none rounded-[10px] py-2.5 px-2 text-[13px] font-bold cursor-pointer transition-colors duration-150 ${tab === "otp" ? "text-[var(--panel)]" : "text-[var(--ink)]/40 hover:text-[var(--ink)]/70"}`}
                   onClick={() => switchTab("otp")}
                   type="button"
                 >
@@ -410,13 +403,13 @@ export default function LoginPage() {
                         <FontAwesomeIcon icon={faEnvelope} /> Verify your email
                         to continue
                       </div>
-                      <p className="leading-relaxed mb-2 text-white/75">
+                      <p className="leading-relaxed mb-2 text-[var(--ink)]/75">
                         {unverifiedMsg}
                       </p>
-                      <ul className="mb-3 pl-4 list-disc leading-relaxed text-white/60">
+                      <ul className="mb-3 pl-4 list-disc leading-relaxed text-[var(--ink)]/60">
                         <li>
                           Check your{" "}
-                          <strong className="text-white/80">
+                          <strong className="text-[var(--ink)]/80">
                             spam or junk
                           </strong>{" "}
                           folder too.
@@ -427,7 +420,7 @@ export default function LoginPage() {
                         </li>
                         <li>
                           Already clicked it? Press{" "}
-                          <strong className="text-white/80">Sign In</strong>{" "}
+                          <strong className="text-[var(--ink)]/80">Sign In</strong>{" "}
                           again.
                         </li>
                       </ul>
@@ -462,11 +455,11 @@ export default function LoginPage() {
                   ) : null}
                   <form onSubmit={doLogin}>
                     <div className="mb-3">
-                      <label className="block text-xs font-bold text-white/[.64] mb-1.5">
+                      <label className="block text-xs font-bold text-[var(--ink)]/[.64] mb-1.5">
                         Email Address
                       </label>
                       <input
-                        className="w-full border border-white/[.12] rounded-xl px-3.5 py-3 bg-white/[.045] text-white text-sm outline-none focus:border-orange focus:shadow-[0_0_0_4px_rgba(255,75,10,.12)] placeholder:text-white/[.26]"
+                        className="w-full border border-[var(--line)] rounded-xl px-3.5 py-3 bg-[var(--night)] text-[var(--ink)] text-sm outline-none focus:border-[var(--orange)] focus:bg-[var(--panel)] focus:shadow-[0_0_0_4px_rgba(211,140,85,0.15)] placeholder:text-[var(--ink)]/[.26]"
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -475,12 +468,12 @@ export default function LoginPage() {
                       />
                     </div>
                     <div className="mb-3">
-                      <label className="block text-xs font-bold text-white/[.64] mb-1.5">
+                      <label className="block text-xs font-bold text-[var(--ink)]/[.64] mb-1.5">
                         Password
                       </label>
                       <div className="relative">
                         <input
-                          className="w-full border border-white/[.12] rounded-xl px-3.5 py-3 pr-11 bg-white/[.045] text-white text-sm outline-none focus:border-orange focus:shadow-[0_0_0_4px_rgba(255,75,10,.12)] placeholder:text-white/[.26]"
+                          className="w-full border border-[var(--line)] rounded-xl px-3.5 py-3 pr-11 bg-[var(--night)] text-[var(--ink)] text-sm outline-none focus:border-[var(--orange)] focus:bg-[var(--panel)] focus:shadow-[0_0_0_4px_rgba(211,140,85,0.15)] placeholder:text-[var(--ink)]/[.26]"
                           type={showPw ? "text" : "password"}
                           value={pw}
                           onChange={(e) => setPw(e.target.value)}
@@ -490,19 +483,19 @@ export default function LoginPage() {
                         <button
                           type="button"
                           onClick={() => setShowPw((s) => !s)}
-                          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/70 bg-transparent border-none cursor-pointer"
+                          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[var(--ink)]/40 hover:text-[var(--ink)]/70 bg-transparent border-none cursor-pointer"
                         >
                           <FontAwesomeIcon icon={showPw ? faEyeSlash : faEye} />
                         </button>
                       </div>
                     </div>
                     <div className="flex items-center justify-between gap-3 mb-4">
-                      <label className="flex items-center gap-2 text-xs text-white/50 cursor-pointer select-none whitespace-nowrap flex-shrink-0">
+                      <label className="flex items-center gap-2 text-xs text-[var(--ink)]/50 cursor-pointer select-none whitespace-nowrap flex-shrink-0">
                         <input
                           type="checkbox"
                           checked={rememberMe}
                           onChange={(e) => setRememberMe(e.target.checked)}
-                          className="accent-orange flex-shrink-0"
+                          className="accent-[var(--orange)] flex-shrink-0"
                         />{" "}
                         Remember me
                       </label>
@@ -513,7 +506,7 @@ export default function LoginPage() {
                           setForgotStatus("idle");
                           setForgotEmail(email);
                         }}
-                        className="border-none bg-transparent text-orange text-xs font-bold cursor-pointer whitespace-nowrap flex-shrink-0"
+                        className="border-none bg-transparent text-[var(--orange)] text-xs font-bold cursor-pointer whitespace-nowrap flex-shrink-0"
                       >
                         Forgot Password?
                       </button>
@@ -527,7 +520,7 @@ export default function LoginPage() {
                     </button>
                     {/* <div className="flex items-center gap-2.5 my-4">
                         <span className="flex-1 h-px bg-white/[.08]"/>
-                        <em className="not-italic text-xs text-white/30">or</em>
+                        <em className="not-italic text-xs text-[var(--ink)]/30">or</em>
                         <span className="flex-1 h-px bg-white/[.08]"/>
                       </div>
                       <div className="grid grid-cols-2 gap-2.5 max-[720px]:grid-cols-1">
@@ -549,15 +542,15 @@ export default function LoginPage() {
                   ) : null}
                   {otpStep === "request" ? (
                     <form onSubmit={requestOtp}>
-                      <p className="text-xs text-white/[.44] mb-4 leading-relaxed">
+                      <p className="text-xs text-[var(--ink)]/[.44] mb-4 leading-relaxed">
                         We'll email you a 6-digit code — no password needed.
                       </p>
                       <div className="mb-4">
-                        <label className="block text-xs font-bold text-white/[.64] mb-1.5">
+                        <label className="block text-xs font-bold text-[var(--ink)]/[.64] mb-1.5">
                           Email Address
                         </label>
                         <input
-                          className="w-full border border-white/[.12] rounded-xl px-3.5 py-3 bg-white/[.045] text-white text-sm outline-none focus:border-orange focus:shadow-[0_0_0_4px_rgba(255,75,10,.12)] placeholder:text-white/[.26]"
+                          className="w-full border border-[var(--line)] rounded-xl px-3.5 py-3 bg-[var(--night)] text-[var(--ink)] text-sm outline-none focus:border-[var(--orange)] focus:bg-[var(--panel)] focus:shadow-[0_0_0_4px_rgba(211,140,85,0.15)] placeholder:text-[var(--ink)]/[.26]"
                           type="email"
                           value={otpEmail}
                           onChange={(e) => setOtpEmail(e.target.value)}
@@ -584,21 +577,21 @@ export default function LoginPage() {
                           setOtpCode("");
                           setOtpErr("");
                         }}
-                        className="flex items-center gap-1.5 border-none bg-transparent text-white/40 hover:text-white/70 text-xs font-semibold cursor-pointer mb-3.5 p-0"
+                        className="flex items-center gap-1.5 border-none bg-transparent text-[var(--ink)]/40 hover:text-[var(--ink)]/70 text-xs font-semibold cursor-pointer mb-3.5 p-0"
                       >
                         <FontAwesomeIcon icon={faArrowLeft} /> Change email
                       </button>
-                      <p className="text-xs text-white/[.44] mb-4 leading-relaxed">
+                      <p className="text-xs text-[var(--ink)]/[.44] mb-4 leading-relaxed">
                         Enter the 6-digit code sent to{" "}
-                        <strong className="text-white/80">{otpEmail}</strong>.
+                        <strong className="text-[var(--ink)]/80">{otpEmail}</strong>.
                       </p>
                       <div className="mb-4">
-                        <label className="block text-xs font-bold text-white/[.64] mb-1.5">
+                        <label className="block text-xs font-bold text-[var(--ink)]/[.64] mb-1.5">
                           Verification Code
                         </label>
                         <input
                           ref={otpInputRef}
-                          className="w-full border border-white/[.12] rounded-xl px-3.5 py-3 bg-white/[.045] text-white text-[22px] font-bold tracking-[.5em] text-center outline-none focus:border-orange focus:shadow-[0_0_0_4px_rgba(255,75,10,.12)] placeholder:text-white/[.2] placeholder:tracking-normal placeholder:text-sm placeholder:font-normal"
+                          className="w-full border border-[var(--line)] rounded-xl px-3.5 py-3 bg-[var(--night)] text-[var(--ink)] text-[22px] font-bold tracking-[.5em] text-center outline-none focus:border-[var(--orange)] focus:bg-[var(--panel)] focus:shadow-[0_0_0_4px_rgba(211,140,85,0.15)] placeholder:text-[var(--ink)]/[.2] placeholder:tracking-normal placeholder:text-sm placeholder:font-normal"
                           inputMode="numeric"
                           autoComplete="one-time-code"
                           maxLength={6}
@@ -614,12 +607,12 @@ export default function LoginPage() {
                         />
                       </div>
                       <div className="flex items-center justify-between gap-3 mb-4">
-                        <label className="flex items-center gap-2 text-xs text-white/50 cursor-pointer select-none whitespace-nowrap flex-shrink-0">
+                        <label className="flex items-center gap-2 text-xs text-[var(--ink)]/50 cursor-pointer select-none whitespace-nowrap flex-shrink-0">
                           <input
                             type="checkbox"
                             checked={rememberMe}
                             onChange={(e) => setRememberMe(e.target.checked)}
-                            className="accent-orange flex-shrink-0"
+                            className="accent-[var(--orange)] flex-shrink-0"
                           />{" "}
                           Remember me
                         </label>
@@ -627,7 +620,7 @@ export default function LoginPage() {
                           type="button"
                           onClick={resendOtp}
                           disabled={otpCooldown > 0 || otpSending}
-                          className="border-none bg-transparent text-orange text-xs font-bold cursor-pointer whitespace-nowrap flex-shrink-0 disabled:text-white/25 disabled:cursor-not-allowed"
+                          className="border-none bg-transparent text-[var(--orange)] text-xs font-bold cursor-pointer whitespace-nowrap flex-shrink-0 disabled:text-[var(--ink)]/25 disabled:cursor-not-allowed"
                         >
                           {otpCooldown > 0
                             ? `Resend in ${otpCooldown}s`
@@ -666,12 +659,12 @@ export default function LoginPage() {
                   icon={faCircleCheck}
                   className="text-green text-4xl mb-3"
                 />
-                <div className="text-lg font-bold text-white mb-1.5">
+                <div className="text-lg font-bold text-[var(--ink)] mb-1.5">
                   Check your email
                 </div>
-                <p className="text-sm text-white/50 mb-5">
+                <p className="text-sm text-[var(--ink)]/50 mb-5">
                   We've sent a password reset link to{" "}
-                  <strong className="text-white">{forgotEmail}</strong>.
+                  <strong className="text-[var(--ink)]">{forgotEmail}</strong>.
                 </p>
                 <button
                   className="button w-full justify-center text-base font-bold !min-h-[58px]"
@@ -683,27 +676,27 @@ export default function LoginPage() {
             ) : (
               <form onSubmit={submitForgotPassword}>
                 <div className="flex items-center justify-between mb-1.5">
-                  <div className="text-lg font-bold text-white">
+                  <div className="text-lg font-bold text-[var(--ink)]">
                     Reset your password
                   </div>
                   <button
                     type="button"
                     onClick={() => setShowForgot(false)}
-                    className="border-none bg-transparent text-white/40 hover:text-white/70 cursor-pointer"
+                    className="border-none bg-transparent text-[var(--ink)]/40 hover:text-[var(--ink)]/70 cursor-pointer"
                   >
                     <FontAwesomeIcon icon={faXmark} />
                   </button>
                 </div>
-                <p className="text-xs text-white/50 mb-4">
+                <p className="text-xs text-[var(--ink)]/50 mb-4">
                   Enter your email and we'll send you a link to reset your
                   password.
                 </p>
                 <div className="mb-4">
-                  <label className="block text-xs font-bold text-white/[.64] mb-1.5">
+                  <label className="block text-xs font-bold text-[var(--ink)]/[.64] mb-1.5">
                     Email Address
                   </label>
                   <input
-                    className="w-full border border-white/[.12] rounded-xl px-3.5 py-3 bg-white/[.045] text-white text-sm outline-none focus:border-orange placeholder:text-white/[.26]"
+                    className="w-full border border-[var(--line)] rounded-xl px-3.5 py-3 bg-[var(--night)] text-[var(--ink)] text-sm outline-none focus:border-[var(--orange)] placeholder:text-[var(--ink)]/[.26]"
                     type="email"
                     value={forgotEmail}
                     onChange={(e) => setForgotEmail(e.target.value)}

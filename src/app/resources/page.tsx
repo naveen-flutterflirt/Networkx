@@ -49,7 +49,7 @@ export default function InsightsIndexPage() {
           <span>Learn. Build. Evolve.</span>
           <h2>Turn better ideas into better connections.</h2>
         </div>
-        <Link href="/pricing">Join NetworkX →</Link>
+        <Link href="/pricing" className="button">Join NetworkX →</Link>
       </section>
       <Footer />
     </main>

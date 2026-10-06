@@ -114,12 +114,12 @@
 }
 .insights-categories span {
   padding: 9px 14px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--orange);
   border-radius: 999px;
-  color: var(--muted);
-  background: rgba(16, 47, 87, 0.6);
-  font-size: 12px;
-  font-weight: 700;
+  color: var(--orange);
+  background: var(--panel);
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .insights-index-grid {
@@ -163,15 +163,7 @@
   font-size: clamp(24px, 2.4vw, 34px);
   letter-spacing: -0.035em;
 }
-.insights-index-cta a {
-  flex: none;
-  padding: 16px 24px;
-  border-radius: 12px;
-  background: #f4510b;
-  color: var(--ink);
-  font-weight: 700;
-  text-decoration: none;
-}
+
 
 .insight-article {
   padding-bottom: 88px;

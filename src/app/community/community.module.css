@@ -20,7 +20,7 @@
   text-decoration: none;
 }
 .brand span {
-  color: #ff5417;
+  color: var(--orange);
 }
 .navActions {
   display: flex;
@@ -86,8 +86,8 @@
 .logoFallback {
   display: grid;
   place-items: center;
-  color: var(--ink);
-  background: linear-gradient(145deg, #ff7b2e, #ff4e0a);
+  color: var(--panel);
+  background: var(--orange);
   font-size: 32px;
   font-weight: 900;
 }
@@ -141,8 +141,8 @@
   border-radius: 50%;
   display: grid;
   place-items: center;
-  color: var(--ink);
-  background: linear-gradient(145deg, #ff8b33, #ff4d08);
+  color: var(--panel);
+  background: var(--orange);
   font-weight: 900;
 }
 .avatar {
@@ -294,8 +294,8 @@
   text-decoration: none;
 }
 .primary {
-  color: var(--ink);
-  background: #ff5417;
+  color: var(--panel);
+  background: var(--orange);
 }
 .secondary {
   color: var(--ink);

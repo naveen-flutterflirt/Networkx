@@ -119,7 +119,7 @@ export default function AboutPage() {
                 Meet our founders <FontAwesomeIcon icon={faArrowRight} />
               </a>
             )}
-            <Link className="button button-secondary" href="/#community">
+            <Link className="button" href="/#community">
               Explore the community
             </Link>
           </div>

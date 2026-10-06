@@ -14,19 +14,7 @@ export default function HomeFinalCtaSection() {
       id="join-networkx"
       aria-labelledby="home-final-cta-title"
     >
-      <div className="home-final-cta-glow" aria-hidden="true" />
-      <div className="home-final-cta-x" aria-hidden="true">
-        <i />
-        <b />
-      </div>
-      <img
-        className="home-final-cta-earth"
-        src="/images/section-10/section10-earth-horizon.png"
-        alt=""
-        width={1672}
-        height={283}
-        aria-hidden="true"
-      />
+
 
       <div className="home-final-cta-content">
         <div className="home-final-cta-eyebrow">
