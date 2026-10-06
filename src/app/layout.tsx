@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.networkxcircle.com"),
   title: "NetworkX | World's FIrst AI-Powered Business Growth Community",
   description: "Learn, build and evolve with NetworkX—the global online business platform for meaningful connections, smarter networking and real opportunities.",
-  icons: { icon: "/favicon.ico" },
+  icons: { icon: "/brand/favicon.png" },
   openGraph: {
     title: "NetworkX | World's FIrst AI-Powered Business Growth Community",
     description: "Learn. Build. Evolve.",

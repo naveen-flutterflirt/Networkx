@@ -27,7 +27,6 @@ export default function MobileNavMenu() {
     <details className="mobile-menu" ref={ref}>
       <summary aria-label="Open navigation"><i /><i /></summary>
       <nav onClick={(e) => { if ((e.target as HTMLElement).closest("a")) close(); }}>
-        <a href="/#top">Home</a>
         <Link href="/about">About</Link>
         <a href="/#solutions">Solutions</a>
         <a href="/#community">Community</a>

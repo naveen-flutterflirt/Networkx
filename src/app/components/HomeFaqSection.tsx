@@ -1,29 +1,6 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
-
-const highlights = [
-  {
-    icon: "/images/section-8/icon-business-leaders.svg",
-    title: "Built for Business Leaders",
-    copy: "Entrepreneurs, professionals & growth-focused companies",
-  },
-  {
-    icon: "/images/section-8/icon-trusted-secure.svg",
-    title: "Trusted & Secure",
-    copy: "Your privacy and data security are our priority",
-  },
-  {
-    icon: "/images/section-8/icon-global-community.svg",
-    title: "Global Community",
-    copy: "Connect across 9+ countries and 59+ industry verticals",
-  },
-  {
-    icon: "/images/section-8/icon-ai-powered.svg",
-    title: "AI-Powered",
-    copy: "Intelligent matchmaking that saves you time",
-  },
-];
+import { useState } from "react";
 
 const faqs = [
   {
@@ -76,67 +53,147 @@ const faqs = [
   },
 ];
 
-function FaqColumn({ start, end, column }: { start: number; end: number; column: 0 | 1 }) {
-  return (
-    <div className="faq-column">
-      {faqs.slice(start, end).map((item, localIndex) => {
-        const index = start + localIndex;
-        const number = String(index + 1).padStart(2, "0");
-        const answerId = `faq-answer-${column}-${index}`;
+const highlights = [
+  {
+    icon: <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />,
+    icon2: <circle cx="9" cy="7" r="4" />,
+    icon3: <polyline points="16 11 18 13 22 9" />,
+    title: "Built for Business",
+    copy: "Entrepreneurs, professionals & growth-focused companies",
+  },
+  {
+    icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />,
+    title: "Trusted & Secure",
+    copy: "Your privacy and data security are our priority",
+  },
+  {
+    icon: <circle cx="12" cy="12" r="10" />,
+    icon2: <line x1="2" y1="12" x2="22" y2="12" />,
+    icon3: <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />,
+    title: "Global Community",
+    copy: "Connect across 9+ countries and 59+ industry verticals",
+  },
+  {
+    icon: <rect x="3" y="11" width="18" height="10" rx="2" />,
+    icon2: <circle cx="12" cy="5" r="2" />,
+    icon3: <path d="M12 7v4" />,
+    title: "AI-Powered",
+    copy: "Intelligent matchmaking that saves you time",
+  },
+];
 
-        return (
-          <details className="faq-item" key={item.question}>
-            <summary className="faq-question" aria-controls={answerId}>
-              <span className="faq-number" aria-hidden="true">{number}</span>
-              <span>{item.question}</span>
-              <img src="/images/section-8/icon-plus.svg" alt="" width="24" height="24" />
-            </summary>
-            <div className="faq-answer" id={answerId}>
-              <p>{item.answer}</p>
-            </div>
-          </details>
-        );
-      })}
+function FaqAccordion({ item, index }: { item: any, index: number }) {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <div 
+      style={{ 
+        background: '#fff', 
+        borderRadius: '16px', 
+        padding: '24px', 
+        boxShadow: '0 4px 20px rgba(0,0,0,0.03)', 
+        cursor: 'pointer',
+        transition: 'all 0.2s ease',
+        border: isOpen ? '1px solid rgba(168,110,69,0.3)' : '1px solid transparent'
+      }}
+      onClick={() => setIsOpen(!isOpen)}
+    >
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '16px' }}>
+        <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+          <span style={{ color: '#a86e45', fontWeight: '800', fontSize: '16px' }}>
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <h3 style={{ fontSize: '15px', fontWeight: '700', color: '#131b23', margin: 0, lineHeight: '1.4' }}>
+            {item.question}
+          </h3>
+        </div>
+        <div style={{ color: '#a86e45', flexShrink: 0, transition: 'transform 0.3s ease', transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)' }}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </div>
+      </div>
+      
+      {isOpen && (
+        <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid rgba(168,110,69,0.1)' }}>
+          <p style={{ fontSize: '14px', color: '#687787', lineHeight: '1.6', margin: 0 }}>
+            {item.answer}
+          </p>
+        </div>
+      )}
     </div>
   );
 }
 
 export default function HomeFaqSection() {
   return (
-    <section className="faq-section" id="faqs" aria-labelledby="faq-title">
-      <header className="faq-header">
-        <div className="faq-badge"><img src="/images/section-8/icon-faq.svg" alt="" width="22" height="22" />FAQs</div>
-        <h2 id="faq-title">Everything You May Want to<br />Know <span>Before Joining</span></h2>
-        <p>Clear answers to the most common questions about <span>NetworkX</span></p>
-      </header>
-
-      <div className="faq-highlights" aria-label="Why people choose NetworkX">
-        {highlights.map((item) => (
-          <article key={item.title}>
-            <img src={item.icon} alt="" width="64" height="64" />
-            <div><h3>{item.title}</h3><p>{item.copy}</p></div>
-          </article>
-        ))}
-      </div>
-
-      <div className="faq-grid">
-        <FaqColumn start={0} end={6} column={0} />
-        <FaqColumn start={6} end={12} column={1} />
-      </div>
-
-      <aside className="faq-support" aria-label="NetworkX support">
-        <div className="faq-support-intro">
-          <img src="/images/section-8/icon-question.svg" alt="" width="68" height="68" />
-          <div><h3>Still have questions?</h3><p>We’re here to help you.</p></div>
-        </div>
-        <div className="faq-support-team">
-          <div className="faq-support-avatars" aria-label="NetworkX support team">
-            {[1, 2, 3].map((member) => <img key={member} src={`/images/section-8/support-member-0${member}.png`} alt={`NetworkX support team member ${member}`} width="56" height="56" />)}
+    <section id="faqs" style={{ padding: '120px 40px', background: '#fffcf8', fontFamily: 'sans-serif' }}>
+      <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
+        
+        {/* Header */}
+        <header style={{ textAlign: 'center', marginBottom: '80px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '24px' }}>
+            <div style={{ width: '40px', height: '2px', background: '#a86e45' }}></div>
+            <span style={{ fontSize: '11px', fontWeight: '800', color: '#a86e45', letterSpacing: '1.5px', textTransform: 'uppercase' }}>Frequently Asked Questions</span>
+            <div style={{ width: '40px', height: '2px', background: '#a86e45' }}></div>
           </div>
-          <p>Our team will get back to you as soon as possible.</p>
+          <h2 style={{ fontSize: '48px', fontWeight: '800', lineHeight: '1.05', color: '#131b23', marginBottom: '20px', letterSpacing: '-0.02em' }}>
+            Everything You May Want to<br />
+            Know <span style={{ color: '#a86e45' }}>Before Joining</span>
+          </h2>
+          <p style={{ fontSize: '16px', color: '#687787', margin: 0 }}>
+            Clear answers to the most common questions about NetworkX.
+          </p>
+        </header>
+
+        {/* Highlights */}
+        <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '80px' }}>
+          {highlights.map((item) => (
+            <div key={item.title} style={{ background: '#fff', borderRadius: '20px', padding: '32px 24px', textAlign: 'center', flex: '1 1 250px', boxShadow: '0 8px 30px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: '#faefe3', color: '#a86e45', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  {item.icon}{item.icon2}{item.icon3}
+                </svg>
+              </div>
+              <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#131b23', marginBottom: '8px' }}>{item.title}</h3>
+              <p style={{ fontSize: '13px', color: '#687787', lineHeight: '1.5', margin: 0 }}>{item.copy}</p>
+            </div>
+          ))}
         </div>
-        <a href="mailto:hello@networkxcircle.com?subject=NetworkX%20Support">Contact Support <img src="/images/section-8/icon-arrow.svg" alt="" width="20" height="20" /></a>
-      </aside>
+
+        {/* FAQ Grid */}
+        <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap', maxWidth: '1000px', margin: '0 auto' }}>
+          <div style={{ flex: '1 1 450px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            {faqs.slice(0, 6).map((item, index) => (
+              <FaqAccordion key={index} item={item} index={index} />
+            ))}
+          </div>
+          <div style={{ flex: '1 1 450px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            {faqs.slice(6, 12).map((item, index) => (
+              <FaqAccordion key={index + 6} item={item} index={index + 6} />
+            ))}
+          </div>
+        </div>
+
+        {/* Support Aside */}
+        <aside style={{ maxWidth: '1000px', margin: '80px auto 0', background: '#131b23', borderRadius: '24px', padding: '40px 60px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '32px', boxShadow: '0 20px 40px rgba(19,27,35,0.15)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+            <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: 'rgba(255,255,255,0.05)', color: '#f3ce95', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '20px', fontWeight: '800', color: '#fff', marginBottom: '4px' }}>Still have questions?</h3>
+              <p style={{ fontSize: '14px', color: '#a5afba', margin: 0 }}>Our team is here to help you.</p>
+            </div>
+          </div>
+          <a href="mailto:hello@networkxcircle.com?subject=NetworkX%20Support" style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', background: '#f3ce95', color: '#131b23', padding: '16px 32px', borderRadius: '12px', fontWeight: '700', fontSize: '15px', textDecoration: 'none', transition: 'background 0.2s', border: 'none' }}>
+            Contact Support 
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </aside>
+
+      </div>
     </section>
   );
 }

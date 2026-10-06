@@ -5,17 +5,17 @@
 /* Keep local development styles hot-reloadable after validation builds. */
 
 :root {
-  --night: #020a16;
-  --night-2: #041120;
-  --panel: #071728;
-  --panel-2: #091d31;
-  --ink: #f7f9fc;
-  --muted: #98a8bc;
-  --line: rgba(112, 153, 198, .17);
-  --blue: #168fff;
-  --cyan: #00bff8;
-  --orange: #ff4b0a;
-  --purple: #b15cff;
+  --night: #fffcf8;
+  --night-2: #f5efe8;
+  --panel: #ffffff;
+  --panel-2: #faf7f2;
+  --ink: #1a1a1a;
+  --muted: #6b6b6b;
+  --line: rgba(168, 110, 69, .15);
+  --blue: #a86e45;
+  --cyan: #c2885f;
+  --orange: #d38c55;
+  --purple: #8f5a36;
   --green: #27d86d;
   --font-marketing: "Manrope", Arial, sans-serif;
   --font-product: "Inter", Arial, sans-serif;
@@ -76,7 +76,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--night); }
-body { margin: 0; background: radial-gradient(circle at 62% 20%, #061b35 0, var(--night) 32%), var(--night); color: var(--ink); font-family: var(--font-marketing); font-weight: 400; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body { margin: 0; background: var(--night); color: var(--ink); font-family: var(--font-marketing); font-weight: 400; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 a { color: inherit; text-decoration: none; }
 button, input { font: inherit; }
 main { overflow: hidden; }

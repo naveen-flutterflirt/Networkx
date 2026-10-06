@@ -38,13 +38,17 @@ export default function NewsletterForm() {
 
   return (
     <>
-      <form className="newsletter-form flex" onSubmit={subscribe}>
-        <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} aria-label="Email address" placeholder="Enter your email" required />
-        <button type="submit" aria-label="Subscribe" disabled={state === "loading"}>
+      <form onSubmit={subscribe} style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+        <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} aria-label="Email address" placeholder="Enter your email" required 
+          style={{ flex: 1, background: 'transparent', border: '1px solid rgba(255,255,255,0.15)', padding: '12px 16px', borderRadius: '8px', color: '#fff', fontSize: '14px', outline: 'none' }}
+        />
+        <button type="submit" aria-label="Subscribe" disabled={state === "loading"}
+          style={{ width: '48px', height: '48px', flexShrink: 0, background: '#f3ce95', border: 'none', borderRadius: '8px', color: '#131b23', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'background 0.2s' }}
+        >
           <FontAwesomeIcon icon={faPaperPlane} />
         </button>
       </form>
-      <p className={`newsletter-status ${state}`} role="status" aria-live="polite">{message}</p>
+      <p style={{ fontSize: '13px', marginTop: '8px', color: state === 'error' ? '#ff6b6b' : '#a5afba' }} role="status" aria-live="polite">{message}</p>
     </>
   );
 }
