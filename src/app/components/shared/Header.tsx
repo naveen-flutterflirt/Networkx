@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import MobileNavMenu from "./MobileNavMenu";
 
@@ -24,6 +25,16 @@ function Image({ priority, ...props }: LocalImageProps) {
 // resolve relative to whatever page is currently rendered — no change
 // needed there, Next.js/browser anchor resolution handles it.
 export default function Header() {
+  const pathname = usePathname() || "";
+  const [activeHash, setActiveHash] = useState("");
+
+  useEffect(() => {
+    setActiveHash(window.location.hash);
+    const handleHashChange = () => setActiveHash(window.location.hash);
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+  
   return (
     <header
       className="site-header"
@@ -33,6 +44,7 @@ export default function Header() {
         padding: "10px 40px",
         background: "#fffcf8",
         width: "100%",
+        boxSizing: "border-box",
         position: "fixed",
         top: 0,
         zIndex: 100,
@@ -52,35 +64,84 @@ export default function Header() {
         <a href="/" className="logo-link" aria-label="NetworkX home">
           <div style={{ display: "flex", alignItems: "center" }}>
             <Image
-              src="/brand/logo.png"
+              src="/brand/networkx-logo-header.png"
               alt="NetworkX Logo"
-              style={{ height: "40px", width: "auto" }}
+              style={{ height: "40px", width: "auto", filter: "invert(1) hue-rotate(180deg)" }}
+              className="header-logo-image"
             />
           </div>
         </a>
         <nav
           className="desktop-nav hidden md:flex"
           aria-label="Primary navigation"
-          style={{ gap: "32px", fontWeight: "500", fontSize: "15px" }}
+          style={{ gap: "32px", fontWeight: "500", fontSize: "15px", alignItems: "center" }}
         >
-          <Link href="/about" style={{ color: "#131b23" }}>
+          <Link
+            href="/about"
+            style={{
+              color: "#131b23",
+              boxShadow: pathname.includes("/about") ? "0 2px 0 0 #a86e45" : "none",
+              paddingBottom: "4px",
+              transition: "box-shadow 0.2s"
+            }}
+          >
             About
           </Link>
-          <a href="/#solutions" style={{ color: "#131b23" }}>
+          <Link
+            href="/#solutions"
+            style={{
+              color: "#131b23",
+              boxShadow: pathname === "/" && activeHash === "#solutions" ? "0 2px 0 0 #a86e45" : "none",
+              paddingBottom: "4px",
+              transition: "box-shadow 0.2s"
+            }}
+          >
             Solutions
-          </a>
-          <a href="/#community" style={{ color: "#131b23" }}>
+          </Link>
+          <Link
+            href="/#community"
+            style={{
+              color: "#131b23",
+              boxShadow: pathname === "/" && activeHash === "#community" ? "0 2px 0 0 #a86e45" : "none",
+              paddingBottom: "4px",
+              transition: "box-shadow 0.2s"
+            }}
+          >
             Community
-          </a>
-          <Link href="/resources" style={{ color: "#131b23" }}>
+          </Link>
+          <Link
+            href="/resources"
+            style={{
+              color: "#131b23",
+              boxShadow: pathname.includes("/resources") ? "0 2px 0 0 #a86e45" : "none",
+              paddingBottom: "4px",
+              transition: "box-shadow 0.2s"
+            }}
+          >
             Resources
           </Link>
-          <Link href="/pricing" style={{ color: "#131b23" }}>
+          <Link
+            href="/pricing"
+            style={{
+              color: "#131b23",
+              boxShadow: pathname.includes("/pricing") ? "0 2px 0 0 #a86e45" : "none",
+              paddingBottom: "4px",
+              transition: "box-shadow 0.2s"
+            }}
+          >
             Pricing
           </Link>
-          <a href="/#contact" style={{ color: "#131b23" }}>
+          <Link
+            href="/#contact"
+            style={{
+              color: "#131b23",
+              boxShadow: pathname === "/" && activeHash === "#contact" ? "0 2px 0 0 #a86e45" : "none",
+              paddingBottom: "4px",
+              transition: "box-shadow 0.2s"
+            }}
+          >
             Contact
-          </a>
+          </Link>
         </nav>
         <div
           className="header-actions hidden md:flex"

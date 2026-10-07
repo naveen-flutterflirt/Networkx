@@ -2,14 +2,13 @@
   position: relative;
   width: 100vw;
   max-width: none;
-  min-height: 720px;
   margin-left: calc(50% - 50vw);
   overflow: hidden;
   isolation: isolate;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 62px 32px 178px;
+  padding: 62px 32px 80px;
   color: var(--ink);
   border-top: 1px solid var(--line);
   background: var(--night);
@@ -143,7 +142,7 @@
   inset: 20px 2% -20px;
   background: radial-gradient(
     ellipse at center,
-    rgba(3, 10, 25, 0.8),
+    rgba(3, 10, 25, 0.05),
     transparent 70%
   );
   filter: blur(18px);
@@ -166,8 +165,7 @@
 .home-final-cta-eyebrow i {
   width: 68px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #ff7a31);
-  box-shadow: 0 0 8px rgba(255, 103, 31, 0.42);
+  background: linear-gradient(90deg, transparent, var(--orange));
 }
 
 .home-final-cta-eyebrow i:last-child {
@@ -191,11 +189,7 @@
 
 .home-final-cta h2 em {
   font-style: normal;
-  color: var(--ink);
-  background: linear-gradient(95deg, #ff6c24, #dc3e12);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--orange);
 }
 
 .home-final-cta-content > p {
@@ -237,10 +231,11 @@
 }
 
 .home-final-cta-actions a:first-child {
-  border-color: var(--ink);
-  background: linear-gradient(105deg, #ff6c22, #f2440d);
+  border-color: var(--orange);
+  background: var(--orange);
+  color: var(--panel);
   box-shadow:
-    0 12px 34px rgba(255, 77, 10, 0.24),
+    0 12px 34px color-mix(in srgb, var(--orange) 30%, transparent),
     inset 0 1px rgba(255, 255, 255, 0.16);
 }
 
@@ -250,9 +245,9 @@
   background: rgba(14, 29, 52, 0.9);
 }
 .home-final-cta-actions a:first-child:hover {
-  border-color: var(--ink);
-  background: linear-gradient(105deg, #ff7b36, #fa4c12);
-  box-shadow: 0 15px 39px rgba(255, 77, 10, 0.32);
+  border-color: var(--orange);
+  background: color-mix(in srgb, var(--orange) 90%, black);
+  box-shadow: 0 15px 39px color-mix(in srgb, var(--orange) 40%, transparent);
 }
 .home-final-cta-actions a:focus-visible {
   outline: 3px solid #45a7ff;
@@ -273,31 +268,23 @@
   position: relative;
   z-index: 4;
   width: min(1240px, calc(100% - 64px));
-  margin-top: 48px;
+  margin-top: 32px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: linear-gradient(
-    90deg,
-    rgba(3, 16, 35, 0.88),
-    rgba(5, 20, 42, 0.78),
-    rgba(3, 14, 31, 0.88)
-  );
-  box-shadow:
-    0 18px 55px rgba(0, 0, 0, 0.24),
-    inset 0 1px rgba(255, 255, 255, 0.035);
-  backdrop-filter: blur(12px);
+  background: var(--panel);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
 }
 
 .home-final-cta-benefits article {
   position: relative;
   min-height: 86px;
-  padding: 16px 25px;
+  padding: 16px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .home-final-cta-benefits article + article::before {
@@ -307,64 +294,30 @@
   top: 18px;
   bottom: 18px;
   width: 1px;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(128, 160, 204, 0.52),
-    transparent
-  );
+  background: var(--line);
 }
 
 .home-final-cta-benefit-icon {
-  --benefit-accent: #66b9ff;
-  --benefit-accent-deep: #1678e8;
-  --benefit-rgb: 52, 155, 255;
   flex: 0 0 45px;
   width: 45px;
   height: 45px;
   position: relative;
   display: grid;
   place-items: center;
-  transform: translateY(-2px);
-  border: 1px solid rgba(var(--benefit-rgb), 0.55);
-  border-radius: 13px;
-  background: linear-gradient(
-    145deg,
-    rgba(var(--benefit-rgb), 0.28),
-    rgba(7, 22, 49, 0.94) 58%,
-    rgba(var(--benefit-rgb), 0.14)
-  );
-  box-shadow:
-    inset 1px 1px 1px rgba(255, 255, 255, 0.2),
-    inset -5px -6px 12px rgba(0, 0, 0, 0.28),
-    0 5px 0 rgba(0, 5, 18, 0.72),
-    0 12px 24px rgba(var(--benefit-rgb), 0.2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--night-2);
 }
 
 .home-final-cta-benefit-icon::before {
-  content: "";
-  position: absolute;
-  top: 5px;
-  right: 7px;
-  left: 7px;
-  height: 8px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.24), transparent);
-  filter: blur(1px);
+  display: none;
 }
 
 .home-final-cta-benefit-icon i {
-  width: 27px;
-  height: 27px;
+  width: 22px;
+  height: 22px;
   display: block;
-  background: linear-gradient(
-    145deg,
-    #f7fbff 0%,
-    var(--benefit-accent) 34%,
-    var(--benefit-accent-deep) 100%
-  );
-  filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.32))
-    drop-shadow(0 0 7px rgba(var(--benefit-rgb), 0.7));
+  background: var(--orange);
   -webkit-mask-position: center;
   mask-position: center;
   -webkit-mask-size: contain;
@@ -377,28 +330,13 @@
   -webkit-mask-image: url("/images/section-10/icon-global.svg");
   mask-image: url("/images/section-10/icon-global.svg");
 }
-.home-final-cta-benefit-icon.cyan {
-  --benefit-accent: #5ee9ff;
-  --benefit-accent-deep: #0a9fda;
-  --benefit-rgb: 55, 211, 255;
-}
 .home-final-cta-benefit-icon.cyan i {
   -webkit-mask-image: url("/images/section-10/icon-ai.svg");
   mask-image: url("/images/section-10/icon-ai.svg");
 }
-.home-final-cta-benefit-icon.orange {
-  --benefit-accent: #ffc06a;
-  --benefit-accent-deep: #f06a16;
-  --benefit-rgb: 255, 145, 49;
-}
 .home-final-cta-benefit-icon.orange i {
   -webkit-mask-image: url("/images/section-10/icon-pricing.svg");
   mask-image: url("/images/section-10/icon-pricing.svg");
-}
-.home-final-cta-benefit-icon.violet {
-  --benefit-accent: #d5a7ff;
-  --benefit-accent-deep: #8048e8;
-  --benefit-rgb: 170, 102, 255;
 }
 .home-final-cta-benefit-icon.violet i {
   -webkit-mask-image: url("/images/section-10/icon-membership.svg");
@@ -413,8 +351,7 @@
 
 @media (max-width: 1100px) {
   .home-final-cta {
-    min-height: 710px;
-    padding: 58px 26px 165px;
+    padding: 58px 26px 80px;
   }
   .home-final-cta h2 {
     font-size: clamp(40px, 4.6vw, 50px);
@@ -435,8 +372,7 @@
 
 @media (max-width: 820px) {
   .home-final-cta {
-    min-height: 780px;
-    padding: 58px 24px 135px;
+    padding: 58px 24px 70px;
   }
   .home-final-cta h2 {
     font-size: clamp(38px, 7.5vw, 50px);
@@ -477,8 +413,7 @@
 
 @media (max-width: 560px) {
   .home-final-cta {
-    min-height: 850px;
-    padding: 52px 18px 98px;
+    padding: 52px 18px 60px;
   }
   .home-final-cta-eyebrow {
     gap: 12px;

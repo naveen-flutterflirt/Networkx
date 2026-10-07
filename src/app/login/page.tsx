@@ -256,7 +256,7 @@ export default function LoginPage() {
       <Header />
 
       <div
-        className="min-h-[calc(100vh-140px)] relative overflow-hidden text-[var(--ink)] bg-[var(--night)] pt-28 pb-24"
+        className="min-h-[calc(100vh-140px)] relative overflow-hidden text-[var(--ink)] bg-[var(--night)] pt-28 pb-12 max-[720px]:pb-4 max-[720px]:pt-20"
       >
         {/* Bug fix: gridTemplateColumns was set via inline style, which
             ALWAYS overrides a CSS class regardless of specificity or media
@@ -267,7 +267,7 @@ export default function LoginPage() {
             narrower than ~840px total. Moved into a real Tailwind
             arbitrary-value grid-cols-[...] class instead, so the
             max-[1180px]: breakpoint can actually override it as intended. */}
-        <div className="max-w-[1200px] w-full mx-auto relative z-[1] grid gap-12 items-center p-[20px_26px_60px] grid-cols-[minmax(0,1.25fr)_minmax(380px,460px)] max-[1180px]:grid-cols-1 max-[1180px]:p-[40px_18px_60px] max-[540px]:p-[40px_12px_40px]">
+        <div className="max-w-[1200px] w-full mx-auto relative z-[1] grid gap-12 max-[720px]:gap-8 items-center p-[20px_26px_60px] grid-cols-[minmax(0,1.25fr)_minmax(380px,460px)] max-[1180px]:grid-cols-1 max-[1180px]:p-[40px_18px_60px] max-[540px]:p-[40px_12px_12px]">
           {/* ── LEFT: hero copy ─────────────────────────────────────── */}
           <section className="min-w-0 p-[8px_4px_8px_18px] max-[1180px]:order-1">
             <h1 className="text-[clamp(32px,4vw,56px)] leading-[.99] tracking-[-2px] font-extrabold mb-6 max-[720px]:text-[clamp(34px,10vw,48px)]">

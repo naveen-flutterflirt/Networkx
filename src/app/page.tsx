@@ -376,17 +376,13 @@ export default function Home() {
       >
         {/* The background image with a gradient blend fading from solid background color on left to transparent on right */}
         <div
+          className="hero-bg-layer"
           style={{
             position: "absolute",
             top: "44px",
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundImage:
-              "linear-gradient(to top, #fffcf8 0%, rgba(255, 252, 248, 0.9) 5%, transparent 25%), linear-gradient(to right, #fffcf8 35%, rgba(255, 252, 248, 0.8) 50%, transparent 75%), url(/images/hero_bg/hero_bg.png)",
-            backgroundPosition: "right center",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
             zIndex: 0,
           }}
         ></div>
@@ -398,11 +394,12 @@ export default function Home() {
             width: "100%",
             display: "flex",
             justifyContent: "center",
-            padding: "0 40px",
+            padding: "0 clamp(16px, 4vw, 40px)",
+            boxSizing: "border-box",
           }}
         >
-          <div style={{ width: "100%", maxWidth: "1300px", display: "flex" }}>
-            <div style={{ maxWidth: "640px", paddingTop: "60px" }}>
+          <div style={{ width: "100%", maxWidth: "1300px", display: "flex", flexWrap: "wrap" }}>
+            <div style={{ maxWidth: "640px", paddingTop: "clamp(30px, 6vw, 60px)" }}>
               <div
                 style={{
                   display: "inline-flex",
@@ -422,17 +419,18 @@ export default function Home() {
               </div>
 
               <h1
+                className="text-[clamp(40px,8vw,65px)] max-[768px]:text-[36px] max-[540px]:text-[32px] max-[380px]:text-[26px]"
                 style={{
-                  fontSize: "65px",
                   lineHeight: "0.95",
                   fontWeight: "800",
                   marginBottom: "28px",
                   letterSpacing: "-0.04em",
                   color: "#071018",
+                  wordWrap: "break-word",
                 }}
               >
                 Meet the Right People for
-                <span style={{ display: "block", marginTop: "12px" }}>
+                <span style={{ display: "block", marginTop: "12px", whiteSpace: "normal" }}>
                   {" "}
                   <span style={{ color: "#a36d42" }}>Real Opportunities</span>
                 </span>
@@ -456,8 +454,9 @@ export default function Home() {
               <div
                 style={{
                   display: "flex",
-                  gap: "16px",
+                  gap: "clamp(8px, 2vw, 16px)",
                   alignItems: "center",
+                  flexWrap: "nowrap",
                   marginBottom: "50px",
                 }}
               >
@@ -466,32 +465,34 @@ export default function Home() {
                   style={{
                     background: "#a36d42",
                     color: "#fff",
-                    padding: "18px 36px",
-                    borderRadius: "12px",
+                    padding: "clamp(10px, 2.5vw, 16px) clamp(16px, 4vw, 32px)",
+                    borderRadius: "clamp(8px, 2vw, 12px)",
                     fontWeight: "600",
-                    fontSize: "17px",
+                    fontSize: "clamp(14px, 3vw, 16px)",
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: "12px",
+                    gap: "clamp(6px, 1.5vw, 12px)",
                     boxShadow: "0 8px 24px rgba(163, 109, 66, 0.25)",
+                    whiteSpace: "nowrap",
                   }}
                 >
                   Get Started Free{" "}
-                  <span style={{ fontSize: "20px", fontWeight: "300" }}>→</span>
+                  <span style={{ fontSize: "clamp(16px, 3.5vw, 20px)", fontWeight: "300" }}>→</span>
                 </Link>
                 <a
                   href="#how-it-works"
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: "14px",
+                    gap: "clamp(8px, 2vw, 14px)",
                     fontWeight: "600",
-                    fontSize: "17px",
+                    fontSize: "clamp(14px, 3vw, 16px)",
                     color: "#071018",
                     background: "#fff",
-                    padding: "16px 32px",
-                    borderRadius: "12px",
+                    padding: "clamp(8px, 2.5vw, 14px) clamp(14px, 4vw, 28px)",
+                    borderRadius: "clamp(8px, 2vw, 12px)",
                     boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
+                    whiteSpace: "nowrap",
                   }}
                 >
                   <span
@@ -565,7 +566,7 @@ export default function Home() {
             </div>
             <h2
               style={{
-                fontSize: "32px",
+                fontSize: "clamp(24px, 5vw, 32px)",
                 fontWeight: "800",
                 color: "#131b23",
                 letterSpacing: "-0.02em",
@@ -577,14 +578,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: "16px",
-            }}
-          >
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 lg:gap-4 w-full">
             {[
               {
                 step: 1,
@@ -700,12 +694,7 @@ export default function Home() {
             ].map((item, idx) => (
               <React.Fragment key={item.step}>
                 <div
-                  style={{
-                    flex: 1,
-                    display: "flex",
-                    gap: "16px",
-                    alignItems: "center",
-                  }}
+                  className="flex-1 flex items-center gap-4 w-full lg:w-auto"
                 >
                   <div
                     style={{
@@ -729,7 +718,7 @@ export default function Home() {
                         fontWeight: "700",
                         marginBottom: "4px",
                         color: "#131b23",
-                        whiteSpace: "nowrap",
+                        whiteSpace: "normal",
                       }}
                     >
                       {item.title}
@@ -747,13 +736,7 @@ export default function Home() {
                   </div>
                 </div>
                 {idx < 3 && (
-                  <div
-                    style={{
-                      color: "#b5c0cc",
-                      padding: "0 8px",
-                      flexShrink: 0,
-                    }}
-                  >
+                  <div className="hidden lg:block text-[#b5c0cc] px-2 shrink-0">
                     <svg
                       width="20"
                       height="20"
@@ -777,19 +760,11 @@ export default function Home() {
 
       <section
         id="about"
-        style={{ padding: "120px 40px", background: "#fcf8f3" }}
+        className="bg-[#fcf8f3] px-5 lg:px-10 py-16 lg:py-[120px]"
       >
-        <div
-          style={{
-            maxWidth: "1300px",
-            margin: "0 auto",
-            display: "flex",
-            gap: "80px",
-            alignItems: "center",
-          }}
-        >
+        <div className="max-w-[1300px] mx-auto flex flex-col lg:flex-row gap-10 lg:gap-[80px] items-center lg:items-stretch w-full">
           {/* Left Column */}
-          <div style={{ flex: "1", maxWidth: "500px" }}>
+          <div className="flex-1 w-full lg:max-w-[500px]">
             <div
               style={{
                 fontSize: "11px",
@@ -813,7 +788,7 @@ export default function Home() {
             ></div>
             <h2
               style={{
-                fontSize: "42px",
+                fontSize: "clamp(30px, 6vw, 42px)",
                 fontWeight: "800",
                 lineHeight: "1.05",
                 color: "#131b23",
@@ -874,27 +849,11 @@ export default function Home() {
           </div>
 
           {/* Right Column - Grid */}
-          <div
-            style={{
-              flex: "1.2",
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "20px",
-            }}
-          >
+          <div className="flex-[1.2] w-full grid grid-cols-1 sm:grid-cols-2 gap-5">
             {benefits.map((item, index) => (
               <div
                 key={item.title}
-                style={{
-                  background: "#fffcf8",
-                  borderRadius: "20px",
-                  padding: "32px",
-                  boxShadow: "0 8px 30px rgba(0,0,0,0.04)",
-                  display: "flex",
-                  gap: "20px",
-                  position: "relative",
-                  overflow: "hidden",
-                }}
+                className="bg-[#fffcf8] rounded-[20px] p-6 lg:p-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)] flex flex-col sm:flex-row items-start sm:gap-5 relative overflow-hidden"
               >
                 <div
                   style={{
@@ -973,25 +932,11 @@ export default function Home() {
 
       <section
         id="growth-intelligence"
-        style={{
-          padding: "120px 40px",
-          background:
-            "linear-gradient(135deg, #fffcf8 0%, #f6e8d6 60%, #1a1614 100%)",
-          position: "relative",
-          overflow: "hidden",
-        }}
+        className="px-5 lg:px-10 py-16 lg:py-[120px] bg-gradient-to-br from-[#fffcf8] via-[#f6e8d6] to-[#faefe3] relative overflow-hidden"
       >
-        <div
-          style={{
-            maxWidth: "1400px",
-            margin: "0 auto",
-            display: "flex",
-            gap: "40px",
-            alignItems: "center",
-          }}
-        >
+        <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-10 lg:gap-10 items-start lg:items-center w-full">
           {/* Left Column */}
-          <div style={{ width: "380px", flexShrink: 0 }}>
+          <div className="w-full lg:w-[380px] shrink-0">
             <div
               style={{
                 fontSize: "11px",
@@ -1023,7 +968,7 @@ export default function Home() {
             </div>
             <h2
               style={{
-                fontSize: "46px",
+                fontSize: "clamp(32px, 6vw, 46px)",
                 fontWeight: "800",
                 lineHeight: "1.05",
                 color: "#131b23",
@@ -1108,7 +1053,7 @@ export default function Home() {
           </div>
 
           {/* Right Column - 5 Cards */}
-          <div style={{ flex: 1, display: "flex", gap: "16px" }}>
+          <div className="flex-1 w-full flex flex-row gap-4 overflow-x-auto pb-4 snap-x lg:overflow-visible">
             {[
               {
                 theme: "dark",
@@ -1218,16 +1163,13 @@ export default function Home() {
             ].map((card, idx) => (
               <div
                 key={idx}
+                className="shrink-0 w-[260px] lg:w-auto lg:flex-1 rounded-2xl p-[30px_16px] lg:p-[40px_16px] text-center snap-start"
                 style={{
-                  flex: 1,
                   background:
                     card.theme === "dark"
                       ? "linear-gradient(180deg, #221c18 0%, #110e0c 100%)"
                       : "#fffdfa",
                   color: card.theme === "dark" ? "#fff" : "#131b23",
-                  borderRadius: "16px",
-                  padding: "40px 16px",
-                  textAlign: "center",
                   boxShadow:
                     card.theme === "light"
                       ? "0 10px 30px rgba(0,0,0,0.03)"
@@ -1347,27 +1289,27 @@ export default function Home() {
               </article>
             ))}
           </div>
-          <div className="store-row">
+          <div className="flex flex-nowrap items-center justify-center sm:justify-start gap-2 sm:gap-4 w-full mt-7">
             <a
-              className="store-badge apple-store"
+              className="flex-1 flex min-w-0 items-center justify-center p-2 sm:p-3 border border-[#89909a] rounded-lg transition-colors hover:bg-[#131b23] hover:text-[#fffcf8] group text-[var(--ink)]"
               href="#contact"
               aria-label="Download NetworkX on the App Store"
             >
-              <FontAwesomeIcon icon={faApple} style={{ fontSize: '38px', color: 'var(--ink)' }} />
-              <span>
-                <small>Download on the</small>
-                <strong>App Store</strong>
+              <FontAwesomeIcon icon={faApple} className="text-[clamp(24px,6vw,38px)] text-[var(--ink)] group-hover:text-[#fffcf8] transition-colors" />
+              <span className="flex flex-col ml-1.5 sm:ml-2.5">
+                <small className="text-[clamp(7px,2vw,10px)] leading-none uppercase">Download on the</small>
+                <strong className="text-[clamp(12px,3.5vw,19px)] font-semibold leading-tight mt-0.5">App Store</strong>
               </span>
             </a>
             <a
-              className="store-badge play-store"
+              className="flex-1 flex min-w-0 items-center justify-center p-2 sm:p-3 border border-[#89909a] rounded-lg transition-colors hover:bg-[#131b23] hover:text-[#fffcf8] group text-[var(--ink)]"
               href="#contact"
               aria-label="Get NetworkX on Google Play"
             >
-              <FontAwesomeIcon icon={faGooglePlay} style={{ fontSize: '32px', color: 'var(--ink)' }} />
-              <span>
-                <small>GET IT ON</small>
-                <strong>Google Play</strong>
+              <FontAwesomeIcon icon={faGooglePlay} className="text-[clamp(22px,5vw,32px)] text-[var(--ink)] group-hover:text-[#fffcf8] transition-colors" />
+              <span className="flex flex-col ml-1.5 sm:ml-2.5">
+                <small className="text-[clamp(7px,2vw,10px)] leading-none uppercase">GET IT ON</small>
+                <strong className="text-[clamp(12px,3.5vw,19px)] font-semibold leading-tight mt-0.5">Google Play</strong>
               </span>
             </a>
           </div>
@@ -1420,7 +1362,7 @@ export default function Home() {
             </div>
             <h2
               style={{
-                fontSize: "48px",
+                fontSize: "clamp(32px, 6vw, 48px)",
                 fontWeight: "800",
                 lineHeight: "1.05",
                 color: "#131b23",
@@ -1451,7 +1393,7 @@ export default function Home() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
               gap: "40px",
               marginBottom: "60px",
             }}
@@ -1468,29 +1410,120 @@ export default function Home() {
                   flexDirection: "column",
                 }}
               >
-                {/* Image Header */}
+                {/* Image Header with Details */}
                 <div
                   style={{
                     background: "#faefe3",
-                    height: "240px",
-                    display: "flex",
-                    alignItems: "flex-end",
-                    justifyContent: "center",
+                    height: "280px",
+                    position: "relative",
                     overflow: "hidden",
+                    display: "flex",
                   }}
                 >
-                  <Image
-                    src={story.portrait}
-                    alt={story.name}
-                    width={204}
-                    height={416}
+                  {/* Portrait */}
+                  <div style={{ position: "relative", width: "50%", height: "100%" }}>
+                    <Image
+                      src={story.portrait}
+                      alt={story.name}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        objectPosition: "center",
+                      }}
+                    />
+                  </div>
+                  {/* Identity Details in the Gap */}
+                  <div
                     style={{
-                      height: "280px",
-                      width: "auto",
-                      objectFit: "contain",
-                      marginBottom: "-20px",
+                      width: "50%",
+                      padding: "32px 24px 32px 16px",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
                     }}
-                  />
+                  >
+                    <h3
+                      style={{
+                        fontSize: "20px",
+                        fontWeight: "800",
+                        color: "#131b23",
+                        marginBottom: "4px",
+                        lineHeight: 1.2,
+                      }}
+                    >
+                      {story.name}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: "13px",
+                        color: "#a86e45",
+                        fontWeight: "700",
+                        marginBottom: "16px",
+                        lineHeight: 1.4,
+                      }}
+                    >
+                      {story.role}
+                    </p>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "8px",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontSize: "12px",
+                          color: "#687787",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "8px",
+                        }}
+                      >
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          style={{ flexShrink: 0 }}
+                        >
+                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                          <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span style={{ lineHeight: 1.3 }}>{story.location}</span>
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "12px",
+                          color: "#687787",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "8px",
+                        }}
+                      >
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          style={{ flexShrink: 0 }}
+                        >
+                          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        </svg>
+                        <span style={{ lineHeight: 1.3 }}>{story.industry}</span>
+                      </span>
+                    </div>
+                  </div>
                 </div>
                 {/* Card Body */}
                 <div
@@ -1507,7 +1540,7 @@ export default function Home() {
                         position: "absolute",
                         top: "-10px",
                         left: "-10px",
-                        fontSize: "60px",
+                        fontSize: "clamp(40px, 8vw, 60px)",
                         color: "rgba(168,110,69,0.1)",
                         fontFamily: "serif",
                         lineHeight: 1,
@@ -1534,144 +1567,62 @@ export default function Home() {
                       marginTop: "auto",
                       paddingTop: "24px",
                       borderTop: "1px solid rgba(168,110,69,0.15)",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
                     }}
                   >
+                    <span
+                      style={{
+                        fontSize: "13px",
+                        fontWeight: "700",
+                        color: "#a86e45",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.5px",
+                      }}
+                    >
+                      Outcome
+                    </span>
                     <div
                       style={{
                         display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-start",
-                        gap: "16px",
+                        alignItems: "center",
+                        gap: "10px",
+                        background: "#fff",
+                        padding: "8px 16px",
+                        borderRadius: "24px",
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.03)",
                       }}
                     >
-                      <div>
-                        <h3
-                          style={{
-                            fontSize: "18px",
-                            fontWeight: "800",
-                            color: "#131b23",
-                            marginBottom: "4px",
-                          }}
-                        >
-                          {story.name}
-                        </h3>
-                        <p
-                          style={{
-                            fontSize: "13px",
-                            color: "#a86e45",
-                            fontWeight: "700",
-                            marginBottom: "8px",
-                          }}
-                        >
-                          {story.role}
-                        </p>
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: "4px",
-                          }}
-                        >
-                          <span
-                            style={{
-                              fontSize: "12px",
-                              color: "#687787",
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "6px",
-                            }}
-                          >
-                            <svg
-                              width="14"
-                              height="14"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                              <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
-                            {story.location}
-                          </span>
-                          <span
-                            style={{
-                              fontSize: "12px",
-                              color: "#687787",
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "6px",
-                            }}
-                          >
-                            <svg
-                              width="14"
-                              height="14"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <rect
-                                x="2"
-                                y="7"
-                                width="20"
-                                height="14"
-                                rx="2"
-                                ry="2"
-                              ></rect>
-                              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                            </svg>
-                            {story.industry}
-                          </span>
-                        </div>
-                      </div>
                       <div
                         style={{
+                          width: "24px",
+                          height: "24px",
+                          borderRadius: "50%",
+                          background: "#faefe3",
                           display: "flex",
-                          flexDirection: "column",
                           alignItems: "center",
-                          background: "#fff",
-                          padding: "12px",
-                          borderRadius: "12px",
-                          boxShadow: "0 4px 12px rgba(0,0,0,0.03)",
+                          justifyContent: "center",
                         }}
                       >
-                        <div
-                          style={{
-                            width: "32px",
-                            height: "32px",
-                            borderRadius: "50%",
-                            background: "#faefe3",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            marginBottom: "8px",
-                          }}
-                        >
-                          <Image
-                            src={story.outcomeIcon}
-                            alt=""
-                            width={16}
-                            height={16}
-                          />
-                        </div>
-                        <span
-                          style={{
-                            fontSize: "10px",
-                            fontWeight: "800",
-                            color: "#131b23",
-                            textAlign: "center",
-                            textTransform: "uppercase",
-                            letterSpacing: "0.5px",
-                          }}
-                        >
-                          {story.outcome}
-                        </span>
+                        <Image
+                          src={story.outcomeIcon}
+                          alt=""
+                          width={12}
+                          height={12}
+                        />
                       </div>
+                      <span
+                        style={{
+                          fontSize: "11px",
+                          fontWeight: "800",
+                          color: "#131b23",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.5px",
+                        }}
+                      >
+                        {story.outcome}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -1715,61 +1666,20 @@ export default function Home() {
           </div>
 
           {/* Proof Stats */}
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "24px",
-              justifyContent: "center",
-              borderTop: "1px solid rgba(0,0,0,0.05)",
-              paddingTop: "60px",
-            }}
-          >
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 justify-center border-t border-[rgba(0,0,0,0.05)] pt-10 sm:pt-[60px] w-full">
             {impactProof.map((item) => (
               <div
                 key={item.label}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "16px",
-                  background: "#fffcf8",
-                  padding: "20px 32px",
-                  borderRadius: "100px",
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.02)",
-                }}
+                className="flex flex-col xl:flex-row items-center text-center xl:text-left gap-2 xl:gap-4 bg-[#fffcf8] p-4 xl:p-[20px_32px] rounded-[24px] xl:rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.02)]"
               >
-                <div
-                  style={{
-                    width: "48px",
-                    height: "48px",
-                    borderRadius: "50%",
-                    background: "#fff",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-                  }}
-                >
-                  <Image src={item.icon} alt="" width={24} height={24} />
+                <div className="w-10 h-10 xl:w-12 xl:h-12 shrink-0 rounded-full bg-white flex items-center justify-center shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+                  <Image src={item.icon} alt="" width={24} height={24} className="w-5 h-5 xl:w-6 xl:h-6" />
                 </div>
-                <div>
-                  <div
-                    style={{
-                      fontSize: "20px",
-                      fontWeight: "800",
-                      color: "#131b23",
-                      lineHeight: "1.2",
-                    }}
-                  >
+                <div className="min-w-0">
+                  <div className="text-[16px] xl:text-[20px] font-extrabold text-[#131b23] leading-[1.2]">
                     {item.value}
                   </div>
-                  <div
-                    style={{
-                      fontSize: "13px",
-                      color: "#687787",
-                      fontWeight: "600",
-                    }}
-                  >
+                  <div className="text-[11px] xl:text-[13px] text-[#687787] font-semibold mt-0.5 leading-tight">
                     {item.label}
                   </div>
                 </div>
@@ -1822,11 +1732,11 @@ export default function Home() {
               <div
                 className="membership-prices"
                 aria-label={`${plan.title} annual pricing`}
-                style={{ gridTemplateColumns: '1fr', padding: '16px 0' }}
+                style={{ gridTemplateColumns: '1fr' }}
               >
                 <div style={{ border: 'none', paddingLeft: 0 }}>
                   <p>
-                    <strong style={{ fontSize: '48px' }}>{plan.globalPrice}</strong>
+                    <strong>{plan.globalPrice}</strong>
                     <small>/ year</small>
                   </p>
                 </div>

@@ -451,7 +451,7 @@
     gap: 45px;
   }
   .about-hero h1 {
-    font-size: clamp(52px, 16vw, 72px);
+    font-size: clamp(36px, 10vw, 52px);
   }
   .about-hero-copy > p {
     font-size: 15px;
@@ -619,31 +619,7 @@ main {
   align-items: center;
   gap: clamp(20px, 2vw, 38px);
 }
-.desktop-nav a {
-  position: relative;
-  padding: 33px 0 20px;
-  color: var(--ink);
-  font-size: 15px;
-}
-.desktop-nav a::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  right: 50%;
-  bottom: 5px;
-  height: 2px;
-  background: var(--blue);
-  transition: 0.2s ease;
-}
-.desktop-nav a:hover,
-.desktop-nav .active {
-  color: var(--ink);
-}
-.desktop-nav a:hover::after,
-.desktop-nav .active::after {
-  left: 0;
-  right: 0;
-}
+
 .header-actions {
   display: flex;
   gap: 24px;
@@ -3123,11 +3099,11 @@ footer {
     justify-self: end;
   }
   .mobile-menu summary {
-    width: 42px;
-    height: 42px;
+    width: 36px;
+    height: 36px;
     display: grid;
     place-content: center;
-    gap: 6px;
+    gap: 5px;
     list-style: none;
     border: 1px solid var(--line);
     border-radius: 9px;
@@ -3137,14 +3113,17 @@ footer {
   }
   .mobile-menu summary i {
     width: 19px;
-    height: 1px;
-    background: white;
+    height: 1.5px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform 0.2s ease;
   }
   .mobile-menu nav {
-    position: absolute;
-    top: 74px;
-    right: 0;
-    width: min(320px, calc(100vw - 36px));
+    position: fixed;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(340px, calc(100vw - 36px));
     padding: 16px;
     display: grid;
     border: 1px solid var(--line);
@@ -3155,8 +3134,15 @@ footer {
     padding: 12px 6px;
     border-bottom: 1px solid var(--line);
   }
-  .hero {
-    min-height: 1580px;
+  .site-header {
+    padding: 6px 16px !important;
+  }
+  .header-logo-image {
+    height: 30px !important;
+    width: auto !important;
+  }
+  .hero-bg-layer {
+    display: none !important;
   }
   .hero-copy {
     width: calc(100% - 36px);
@@ -4821,13 +4807,16 @@ footer {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
   }
   .mobile-menu nav {
-    top: 54px;
+    position: fixed;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
     width: min(340px, calc(100vw - 32px));
     max-height: calc(100vh - 120px);
     max-height: calc(100dvh - 120px);
     padding: 12px 18px;
     overflow-y: auto;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
   }
   .mobile-menu nav a {
     padding: 14px 8px;
@@ -4843,10 +4832,10 @@ footer {
   .mobile-menu nav .mobile-join {
     margin-top: 8px;
     justify-content: center;
-    border: 1px solid var(--orange);
+    border: none;
     border-radius: 9px;
-    background: linear-gradient(135deg, #ff5c12, #ef3900);
-    color: var(--ink);
+    background: #a36d42;
+    color: #fff;
     text-align: center;
   }
   .mobile-menu[open] summary i:first-child {
@@ -5297,14 +5286,26 @@ footer {
     transform-origin: left center;
   }
   .store-row {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 8px;
+    width: 100%;
   }
   .store-badge {
-    width: 100%;
+    flex: 1;
     min-width: 0;
+    padding: 6px 8px;
     justify-content: center;
+  }
+  .store-badge strong {
+    font-size: clamp(14px, 4vw, 19px);
+  }
+  .store-badge small {
+    font-size: clamp(8px, 2.5vw, 10px);
+  }
+  .store-badge svg {
+    font-size: clamp(24px, 6vw, 38px) !important;
   }
   .app-visual {
     height: 470px;
@@ -7412,5 +7413,75 @@ h3,
 @media (max-width: 850px) {
   .pricing-hero {
     padding-top: 118px;
+  }
+}
+
+.hero-bg-layer {
+  background-image: linear-gradient(to top, #fffcf8 0%, rgba(255, 252, 248, 0.9) 5%, transparent 25%), linear-gradient(to right, #fffcf8 35%, rgba(255, 252, 248, 0.8) 50%, transparent 75%), url(/images/hero_bg/hero_bg.png);
+  background-position: right center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.footer-top {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: clamp(40px, 8vw, 80px) clamp(20px, 5vw, 40px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+}
+.footer-links-grid {
+  flex: 1 1 auto;
+  display: flex;
+  gap: clamp(16px, 4vw, 32px);
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.footer-link-col {
+  flex: 1 1 100px;
+}
+.footer-newsletter {
+  flex: 1 1 260px;
+  max-width: 300px;
+  border-left: 1px solid var(--line);
+  padding-left: 40px;
+}
+.footer-bottom {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: clamp(24px, 5vw, 32px) clamp(20px, 5vw, 40px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+.footer-bottom-links {
+  display: flex;
+  gap: clamp(12px, 3vw, 24px);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .footer-newsletter {
+    border-left: none;
+    padding-left: 0;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    max-width: 100%;
+  }
+}
+@media (max-width: 600px) {
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .footer-links-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 16px;
   }
 }

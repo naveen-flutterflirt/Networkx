@@ -362,34 +362,9 @@ export default function HomeFaqSection() {
         </div>
 
         {/* Support Aside */}
-        <aside
-          style={{
-            maxWidth: "1000px",
-            margin: "80px auto 0",
-            background: "#131b23",
-            borderRadius: "24px",
-            padding: "40px 60px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            flexWrap: "wrap",
-            gap: "32px",
-            boxShadow: "0 20px 40px rgba(19,27,35,0.15)",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-            <div
-              style={{
-                width: "64px",
-                height: "64px",
-                borderRadius: "16px",
-                background: "rgba(255,255,255,0.05)",
-                color: "#f3ce95",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+        <aside className="max-w-[1000px] mx-auto mt-12 md:mt-20 bg-[#131b23] rounded-3xl p-6 sm:p-8 md:p-[40px_60px] flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-8 shadow-[0_20px_40px_rgba(19,27,35,0.15)]">
+          <div className="flex items-center gap-4 md:gap-6">
+            <div className="w-12 h-12 md:w-16 md:h-16 shrink-0 rounded-2xl bg-white/5 text-[#f3ce95] flex items-center justify-center">
               <svg
                 width="32"
                 height="32"
@@ -399,6 +374,7 @@ export default function HomeFaqSection() {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                className="w-6 h-6 md:w-8 md:h-8"
               >
                 <circle cx="12" cy="12" r="10"></circle>
                 <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
@@ -406,37 +382,17 @@ export default function HomeFaqSection() {
               </svg>
             </div>
             <div>
-              <h3
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "800",
-                  color: "#fff",
-                  marginBottom: "4px",
-                }}
-              >
+              <h3 className="text-lg md:text-[20px] font-extrabold text-white mb-1">
                 Still have questions?
               </h3>
-              <p style={{ fontSize: "14px", color: "#a5afba", margin: 0 }}>
+              <p className="text-xs md:text-[14px] text-[#a5afba] m-0">
                 Our team is here to help you.
               </p>
             </div>
           </div>
           <a
             href="mailto:hello@networkxcircle.com?subject=NetworkX%20Support"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "12px",
-              background: "#f3ce95",
-              color: "#131b23",
-              padding: "16px 32px",
-              borderRadius: "12px",
-              fontWeight: "700",
-              fontSize: "15px",
-              textDecoration: "none",
-              transition: "background 0.2s",
-              border: "none",
-            }}
+            className="inline-flex items-center gap-3 bg-[#f3ce95] text-[#131b23] px-6 py-3 md:px-8 md:py-4 rounded-xl font-bold text-sm md:text-[15px] no-underline transition-colors hover:bg-[#e6c085] border-none w-full md:w-auto justify-center"
           >
             Contact Support
             <svg

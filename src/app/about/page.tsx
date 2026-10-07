@@ -49,7 +49,7 @@ const founders = [
 const SHOW_FOUNDING_TEAM = false;
 
 const locations = [
-  { flag: "🇺🇸", city: "New York", country: "USA", note: "Global headquarters" },
+  { flag: "🇺🇸", city: "Leesburg, Virginia", country: "USA", note: "Global headquarters (Scenic Creek Way, 20176)" },
   {
     flag: "🇬🇧",
     city: "London",
@@ -123,12 +123,16 @@ export default function AboutPage() {
               Explore the community
             </Link>
           </div>
-          <div className="about-proof">
-            <strong>9</strong>
-            <span>international hubs</span>
-            <i />
-            <strong>5</strong>
-            <span>continents connected</span>
+          <div className="flex flex-row items-center gap-3 sm:gap-4 mt-10 sm:mt-[58px] text-[8px] sm:text-[10px] font-bold uppercase tracking-[0.05em] sm:tracking-[0.1em] text-[var(--muted)]">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <strong className="text-[22px] sm:text-[28px] text-[var(--ink)] tracking-[-0.03em] font-extrabold leading-none">9</strong>
+              <span className="max-w-[70px] sm:max-w-[120px] leading-snug">international hubs</span>
+            </div>
+            <i className="w-[1px] h-6 sm:h-[38px] bg-[var(--line)] mx-1 sm:mx-2 shrink-0" />
+            <div className="flex items-center gap-2 sm:gap-3">
+              <strong className="text-[22px] sm:text-[28px] text-[var(--ink)] tracking-[-0.03em] font-extrabold leading-none">5</strong>
+              <span className="max-w-[80px] sm:max-w-[120px] leading-snug">continents connected</span>
+            </div>
           </div>
         </div>
         <div className="about-hero-photo">

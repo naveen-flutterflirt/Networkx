@@ -47,7 +47,7 @@
 .home-insights-eyebrow i {
   width: 41px;
   height: 1px;
-  background: #ed4c0b;
+  background: var(--orange);
 }
 .home-insights-eyebrow i:first-child::after,
 .home-insights-eyebrow i:last-child::before {
@@ -57,7 +57,7 @@
   height: 8px;
   margin: -3px 0 0 auto;
   border-radius: 50%;
-  background: #ed4c0b;
+  background: var(--orange);
 }
 .home-insights-eyebrow i:last-child::before {
   margin-left: 0;
@@ -283,7 +283,7 @@
   background: #c9ccd1;
 }
 .insights-progress i.active {
-  background: #ee4f0b;
+  background: var(--orange);
 }
 .insights-cta-bar {
   min-height: 124px;
@@ -326,11 +326,17 @@
   justify-content: space-between;
   align-items: center;
   border-radius: 11px;
-  color: var(--ink);
-  background: linear-gradient(110deg, #ef4c08, #ff650f);
+  color: var(--panel);
+  background: var(--orange);
   font-size: 14px;
   font-weight: 700;
-  box-shadow: 0 9px 21px rgba(239, 76, 8, 0.2);
+  box-shadow: 0 9px 21px color-mix(in srgb, var(--orange) 30%, transparent);
+  transition: all 0.2s ease;
+}
+.insights-cta-bar > a:hover {
+  background: color-mix(in srgb, var(--orange) 90%, black);
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--orange) 40%, transparent);
+  transform: translateY(-2px);
 }
 @media (max-width: 1220px) {
   .home-insights {

@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 // The phone menu is a <details> element, which stays open after a link is
@@ -7,6 +8,7 @@ import { useEffect, useRef } from "react";
 // page being navigated to. Close it on any link tap, on a tap outside it,
 // and on Escape.
 export default function MobileNavMenu() {
+  const pathname = usePathname() || "";
   const ref = useRef<HTMLDetailsElement>(null);
   const close = () => {
     if (ref.current) ref.current.open = false;
@@ -38,15 +40,75 @@ export default function MobileNavMenu() {
           if ((e.target as HTMLElement).closest("a")) close();
         }}
       >
-        <Link href="/about">About</Link>
-        <a href="/#solutions">Solutions</a>
-        <a href="/#community">Community</a>
-        <Link href="/resources">Resources</Link>
-        <Link href="/pricing">Pricing</Link>
-        <a href="/#contact">Contact</a>
-        <a className="mobile-login" href="/login">
+        <Link
+          href="/about"
+          style={{
+            boxShadow: pathname.includes("/about") ? "0 2px 0 0 #a86e45" : "none",
+            paddingBottom: "4px",
+            display: "inline-block",
+            width: "fit-content"
+          }}
+        >
+          About
+        </Link>
+        <Link
+          href="/#solutions"
+          style={{
+            boxShadow: "none",
+            paddingBottom: "4px",
+            display: "inline-block",
+            width: "fit-content"
+          }}
+        >
+          Solutions
+        </Link>
+        <Link
+          href="/#community"
+          style={{
+            boxShadow: "none",
+            paddingBottom: "4px",
+            display: "inline-block",
+            width: "fit-content"
+          }}
+        >
+          Community
+        </Link>
+        <Link
+          href="/resources"
+          style={{
+            boxShadow: pathname.includes("/resources") ? "0 2px 0 0 #a86e45" : "none",
+            paddingBottom: "4px",
+            display: "inline-block",
+            width: "fit-content"
+          }}
+        >
+          Resources
+        </Link>
+        <Link
+          href="/pricing"
+          style={{
+            boxShadow: pathname.includes("/pricing") ? "0 2px 0 0 #a86e45" : "none",
+            paddingBottom: "4px",
+            display: "inline-block",
+            width: "fit-content"
+          }}
+        >
+          Pricing
+        </Link>
+        <Link
+          href="/#contact"
+          style={{
+            boxShadow: "none",
+            paddingBottom: "4px",
+            display: "inline-block",
+            width: "fit-content"
+          }}
+        >
+          Contact
+        </Link>
+        <Link className="mobile-login" href="/login">
           Log in
-        </a>
+        </Link>
         <Link className="mobile-join" href="/pricing">
           Join NetworkX
         </Link>

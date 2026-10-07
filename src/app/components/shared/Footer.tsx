@@ -38,29 +38,16 @@ export default function Footer() {
         fontFamily: "sans-serif",
       }}
     >
-      <div
-        style={{
-          maxWidth: "1300px",
-          margin: "0 auto",
-          padding: "80px 40px",
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "40px",
-          justifyContent: "space-between",
-        }}
-      >
+      <div className="footer-top">
         {/* Brand Column */}
         <div style={{ flex: "1 1 320px", maxWidth: "320px" }}>
-          <div
-            style={{
-              fontSize: "28px",
-              fontWeight: "800",
-              color: "var(--ink)",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Network<span style={{ color: "var(--orange)" }}>X</span>
-          </div>
+          <Image
+            src="/brand/networkx-logo-header.png"
+            alt="NetworkX Logo"
+            width={200}
+            height={50}
+            style={{ height: "48px", width: "auto", filter: "invert(1) hue-rotate(180deg)" }}
+          />
           <p
             style={{
               fontSize: "14px",
@@ -149,16 +136,9 @@ export default function Footer() {
         </div>
 
         {/* Links Columns */}
-        <div
-          style={{
-            flex: "1 1 auto",
-            display: "flex",
-            gap: "32px",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-          }}
-        >
-          <div style={{ flex: "1 1 100px" }}>
+        {/* Links Columns */}
+        <div className="footer-links-grid">
+          <div className="footer-link-col">
             <div style={{ marginBottom: "24px" }}>
               <strong
                 style={{
@@ -235,7 +215,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div style={{ flex: "1 1 100px" }}>
+          <div className="footer-link-col">
             <div style={{ marginBottom: "24px" }}>
               <strong
                 style={{
@@ -312,7 +292,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div style={{ flex: "1 1 100px" }}>
+          <div className="footer-link-col">
             <div style={{ marginBottom: "24px" }}>
               <strong
                 style={{
@@ -389,7 +369,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div style={{ flex: "1 1 100px" }}>
+          <div className="footer-link-col">
             <div style={{ marginBottom: "24px" }}>
               <strong
                 style={{
@@ -468,14 +448,8 @@ export default function Footer() {
         </div>
 
         {/* Newsletter Column */}
-        <div
-          style={{
-            flex: "1 1 260px",
-            maxWidth: "300px",
-            borderLeft: "1px solid var(--line)",
-            paddingLeft: "40px",
-          }}
-        >
+        {/* Newsletter Column */}
+        <div className="footer-newsletter">
           <div style={{ marginBottom: "24px" }}>
             <strong
               style={{
@@ -511,21 +485,12 @@ export default function Footer() {
       </div>
 
       <div style={{ borderTop: "1px solid var(--line)" }}>
-        <div
-          style={{
-            maxWidth: "1300px",
-            margin: "0 auto",
-            padding: "32px 40px",
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "20px",
-            justifyContent: "space-between",
-            alignItems: "center",
-            fontSize: "13px",
-          }}
-        >
-          <span>© 2026 NetworkX. All rights reserved.</span>
-          <div style={{ display: "flex", gap: "24px" }}>
+        <div className="footer-bottom">
+          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+            <span>© 2026 NetworkX. All rights reserved.</span>
+            <span style={{ color: "var(--muted)" }}>Scenic Creek Way, Leesburg, Virginia 20176</span>
+          </div>
+          <div className="footer-bottom-links">
             <a
               href="/#contact"
               style={{ color: "var(--muted)", textDecoration: "none" }}

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: "NetworkX | World's FIrst AI-Powered Business Growth Community",
   description:
     "Learn, build and evolve with NetworkX—the global online business platform for meaningful connections, smarter networking and real opportunities.",
-  icons: { icon: "/brand/favicon.png" },
+  icons: { icon: "/favicon.svg" },
   openGraph: {
     title: "NetworkX | World's FIrst AI-Powered Business Growth Community",
     description: "Learn. Build. Evolve.",
