@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 
-const BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/v1";
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const BASE = `${BASE_URL}/v1`;
 
 function getToken() {
   if (typeof window === "undefined") return null;
